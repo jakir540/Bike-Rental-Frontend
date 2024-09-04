@@ -1,5 +1,7 @@
 import Lottie from "react-lottie";
 import animationData from "../../assets/contact.json";
+import emailjs from "@emailjs/browser";
+import { useRef } from "react";
 
 const ContactUs = () => {
   const defaultOptions = {
@@ -11,6 +13,27 @@ const ContactUs = () => {
     },
   };
 
+  const form = useRef<HTMLFormElement>(null);
+  // for send message to user
+  const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_z4u5ooq",
+        "template_pdmpzex",
+        form.current!,
+        "C61pccjrY14jsvXqX"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+  };
   return (
     <div className="bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white py-10">
       <div className="container mx-auto px-4">
@@ -21,7 +44,7 @@ const ContactUs = () => {
         <div className="flex flex-col lg:flex-row items-center justify-center">
           {/* Form Section */}
           <div className="w-full lg:w-1/2 bg-[#1C2833] rounded-xl shadow-lg p-10 lg:mr-8 transition-all duration-300">
-            <form>
+            <form ref={form} onSubmit={sendEmail}>
               {/* Name Field */}
               <div className="mb-8">
                 <label
@@ -32,6 +55,7 @@ const ContactUs = () => {
                 </label>
                 <input
                   type="text"
+                  name="user_name"
                   id="name"
                   className="w-full px-5 py-3 border-none rounded-lg shadow-sm bg-[#2E4053] text-white placeholder-gray-400 focus:ring-2 focus:ring-[#FF5733] focus:outline-none transition-all duration-300 ease-in-out"
                   placeholder="Enter your name"
@@ -48,6 +72,7 @@ const ContactUs = () => {
                 </label>
                 <input
                   type="email"
+                  name="user_email"
                   id="email"
                   className="w-full px-5 py-3 border-none rounded-lg shadow-sm bg-[#2E4053] text-white placeholder-gray-400 focus:ring-2 focus:ring-[#FF5733] focus:outline-none transition-all duration-300 ease-in-out"
                   placeholder="Enter your email"
@@ -64,6 +89,7 @@ const ContactUs = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   className="w-full h-36 px-5 py-3 border-none rounded-lg shadow-sm bg-[#2E4053] text-white placeholder-gray-400 focus:ring-2 focus:ring-[#FF5733] focus:outline-none transition-all duration-300 ease-in-out"
                   placeholder="Write your message"
                 ></textarea>
@@ -73,6 +99,7 @@ const ContactUs = () => {
               <div className="text-center">
                 <button
                   type="submit"
+                  value="send"
                   className="w-full py-3 px-6 bg-gradient-to-r from-[#DE4313] to-[#FF6F61] text-white font-semibold rounded-lg shadow-lg hover:shadow-2xl transform hover:scale-110 transition-transform duration-300 ease-in-out"
                 >
                   Send Message
