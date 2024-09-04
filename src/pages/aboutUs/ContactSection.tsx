@@ -1,23 +1,3 @@
-// const ContactSection = () => {
-//   return (
-//     <section>
-//       <h2 className="text-4xl font-semibold mb-8 text-[#DE4313]">Contact Us</h2>
-//       <div className="bg-white rounded-lg shadow-lg p-8 hover:shadow-2xl transition-shadow duration-300">
-//         <p className="text-lg font-semibold mb-4 text-gray-900">
-//           Office Address
-//         </p>
-//         <p className="text-gray-700 mb-4">123 Bike Lane, Cityville, ST 45678</p>
-//         <p className="text-lg font-semibold mb-4 text-gray-900">Phone Number</p>
-//         <p className="text-gray-700 mb-4">(123) 456-7890</p>
-//         <p className="text-lg font-semibold mb-4 text-gray-900">Email</p>
-//         <p className="text-gray-700">contact@bikerent.com</p>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default ContactSection;
-
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 

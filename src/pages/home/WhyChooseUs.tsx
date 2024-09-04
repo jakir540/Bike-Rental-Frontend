@@ -5,9 +5,7 @@ const WhyChooseUs = () => {
       <div className="absolute inset-0 overflow-hidden">J</div>
 
       <div className="relative container mx-auto px-6 text-center z-10">
-        <h2 className="text-6xl font-extrabold text-white mb-12">
-          Why Choose Us
-        </h2>
+        <h2 className="text-5xl font-bold text-white mb-12">Why Choose Us</h2>
         <div className="grid gap-12 md:grid-cols-3">
           {/* Card 1 */}
           <div className="group relative p-8 bg-white bg-opacity-90 shadow-xl rounded-lg overflow-hidden transform transition-transform duration-500 hover:-translate-y-3 hover:scale-105">

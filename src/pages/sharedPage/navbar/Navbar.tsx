@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+// import logo from '../../../assets/'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,8 @@ const Navbar = () => {
             to="/"
             className="text-[#ECECEC] text-3xl font-bold tracking-wide"
           >
-            BikeRent
+            {/* <img src={logo} alt="" /> */}
+            Bike Rental
           </NavLink>
         </div>
 
@@ -84,7 +86,7 @@ const Navbar = () => {
             Login
           </NavLink>
           <NavLink
-            to="/signup"
+            to="/signUp"
             className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold py-3 px-8 rounded shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-400"
           >
             Sign Up

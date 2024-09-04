@@ -10,7 +10,7 @@ const AboutUs = () => {
           <h1 className="text-5xl font-extrabold mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#DE4313] to-pink-500">
             About Us
           </h1>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg mb-8">
+          <div className="relative group overflow-hidden rounded-lg shadow-lg mb-8 object-cover w-full flex justify-center">
             <img
               className="rounded transform group-hover:scale-110 transition-transform duration-500"
               src={aboutUs}
@@ -48,6 +48,7 @@ const AboutUs = () => {
           </h2>
           <div className="flex flex-wrap -m-4">
             {/* Example Team Member */}
+
             <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
               <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
                 <img
@@ -66,6 +67,45 @@ const AboutUs = () => {
                 </p>
               </div>
             </div>
+
+            <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
+              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Team Member"
+                  className="w-24 h-24 p-1 rounded-full mx-auto mb-4 border-4 bg-gradient-to-r from-[#DE4313] to-pink-500"
+                />
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                  Jane Doe
+                </h3>
+                <p className="text-[#DE4313]">Founder & CEO</p>
+                <p className="text-gray-700 mt-2">
+                  Jane is the visionary behind our platform, with over a decade
+                  of experience in the cycling industry. She is passionate about
+                  sustainability and innovation.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
+              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
+                <img
+                  src="https://via.placeholder.com/150"
+                  alt="Team Member"
+                  className="w-24 h-24 p-1 rounded-full mx-auto mb-4 border-4 bg-gradient-to-r from-[#DE4313] to-pink-500"
+                />
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                  Jane Doe
+                </h3>
+                <p className="text-[#DE4313]">Founder & CEO</p>
+                <p className="text-gray-700 mt-2">
+                  Jane is the visionary behind our platform, with over a decade
+                  of experience in the cycling industry. She is passionate about
+                  sustainability and innovation.
+                </p>
+              </div>
+            </div>
+
             {/* Repeat for additional team members */}
           </div>
         </section>
