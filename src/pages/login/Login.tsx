@@ -12,6 +12,7 @@ import animationData from "../../assets/Animation login - 1724636559571.json";
 import { useLoginMutation } from "@/redux/features/login/login";
 import { useAppDispatch } from "@/redux/hook";
 import { setUser } from "@/redux/features/auth/authSlice";
+import verifyToken from "@/utils/verifyToken";
 
 interface FormData {
   email: string;
@@ -35,22 +36,20 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [login, { isError, isLoading }] = useLoginMutation();
-  // console.log(isError, isLoading);
 
+  //onsubmit funtion
   const onSubmit = async (data: FormData) => {
-    console.log("Form submitted:", data);
     try {
       const res = await login(data).unwrap();
-      console.log(res.token);
-
+      console.log(res);
+      const user = verifyToken(res.token);
+      console.log(user);
       dispatch(setUser({ user: { email: data.email }, token: res.token }));
     } catch (error) {
-      console.log(error);
+      console.log("Login Error:", error);
     }
-
-    navigate("/login");
   };
 
   return (

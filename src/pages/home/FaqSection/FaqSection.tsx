@@ -3,7 +3,7 @@ import { FiChevronDown } from "react-icons/fi"; // Importing an icon for dropdow
 
 const FaqSection = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white py-20 ">
+    <div className="min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white opacity-90 py-20 ">
       {/* Header Section */}
       <div className="text-center mb-16 space-y-6">
         <h1 className="text-6xl font-extrabold tracking-tight text-[#F5F5F5]">

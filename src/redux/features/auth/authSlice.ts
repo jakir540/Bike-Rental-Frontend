@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit/react";
+import { createSlice } from "@reduxjs/toolkit";
 
 type TInitialState = {
   user: null | object;

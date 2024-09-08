@@ -1,8 +1,11 @@
 import { useShowProfileQuery } from "@/redux/features/showProfile/showProfileApi";
 
+import { useSelector } from "react-redux";
+
 const ProfilePage = () => {
   // Use the custom query hook to fetch the user profile data
   const { data, error, isLoading } = useShowProfileQuery("");
+  const user = useSelector((state) => state.auth.user);
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error fetching profile data.</div>;
@@ -18,7 +21,9 @@ const ProfilePage = () => {
           <strong>Name:</strong> {name}
         </li>
         <li>
-          <strong>Email:</strong> {email}
+          <div>
+            {user ? <p>Welcome, {user.email}</p> : <p>Please log in</p>}
+          </div>
         </li>
         <li>
           <strong>Phone:</strong> {phone}
