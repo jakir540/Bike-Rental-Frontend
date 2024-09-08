@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaHome } from "react-icons/fa";
+import { useSignUpMutation } from "@/redux/features/signUp/signUp";
 
 interface FormData {
   name: string;
@@ -17,11 +18,19 @@ const SignUp = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const [signUp, { isLoading, isError }] = useSignUpMutation();
+  console.log(isLoading, isError);
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     console.log("Form submitted:", data);
-    navigate("/login?success=1");
+    try {
+      const res = await signUp(data).unwrap();
+      console.log("login successfully", res);
+    } catch (error) {
+      console.log(error);
+    }
+    // navigate("/login?success=1");
   };
 
   return (

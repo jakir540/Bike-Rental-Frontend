@@ -1,5 +1,6 @@
 import MainLayout from "@/components/layout/MainLayout";
 import AboutUs from "@/pages/aboutUs/AboutUs";
+import ProfilePage from "@/pages/dashboard/profilePage/ProfilePage";
 import Home from "@/pages/home/Home";
 import Login from "@/pages/login/Login";
 import SignUp from "@/pages/signUp/SignUp";
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "dashboard",
+        element: <ProfilePage />,
       },
     ],
   },

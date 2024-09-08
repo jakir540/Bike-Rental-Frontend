@@ -1,5 +1,8 @@
 import aboutUs from "../../assets/man-choosed-motorcycle.jpg";
 import ContactSection from "./ContactSection";
+import aboutUs1 from "../../assets/bikeUser.jpg";
+import aboutUs2 from "../../assets/happy-man.jpg";
+import aboutUs3 from "../../assets/Jakir.jpg";
 
 const AboutUs = () => {
   return (
@@ -52,12 +55,31 @@ const AboutUs = () => {
             <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
               <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
                 <img
-                  src="https://via.placeholder.com/150"
+                  src={aboutUs1}
                   alt="Team Member"
                   className="w-24 h-24 p-1 rounded-full mx-auto mb-4 border-4 bg-gradient-to-r from-[#DE4313] to-pink-500"
                 />
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                  Jane Doe
+                  Mizanur Rahman
+                </h3>
+                <p className="text-[#DE4313]">Founder</p>
+                <p className="text-gray-700 mt-2">
+                  Jane is the visionary behind our platform, with over a decade
+                  of experience in the cycling industry. She is passionate about
+                  sustainability and innovation.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
+              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
+                <img
+                  src={aboutUs3}
+                  alt="Team Member"
+                  className="w-24 h-24 p-1 rounded-full mx-auto mb-4 border-4 bg-gradient-to-r from-[#DE4313] to-pink-500"
+                />
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">
+                  Md Jakir Hossain
                 </h3>
                 <p className="text-[#DE4313]">Founder & CEO</p>
                 <p className="text-gray-700 mt-2">
@@ -71,33 +93,14 @@ const AboutUs = () => {
             <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
               <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
                 <img
-                  src="https://via.placeholder.com/150"
+                  src={aboutUs2}
                   alt="Team Member"
                   className="w-24 h-24 p-1 rounded-full mx-auto mb-4 border-4 bg-gradient-to-r from-[#DE4313] to-pink-500"
                 />
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                  Jane Doe
+                  Anisul Islam
                 </h3>
-                <p className="text-[#DE4313]">Founder & CEO</p>
-                <p className="text-gray-700 mt-2">
-                  Jane is the visionary behind our platform, with over a decade
-                  of experience in the cycling industry. She is passionate about
-                  sustainability and innovation.
-                </p>
-              </div>
-            </div>
-
-            <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
-              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
-                <img
-                  src="https://via.placeholder.com/150"
-                  alt="Team Member"
-                  className="w-24 h-24 p-1 rounded-full mx-auto mb-4 border-4 bg-gradient-to-r from-[#DE4313] to-pink-500"
-                />
-                <h3 className="text-xl font-semibold mb-2 text-gray-900">
-                  Jane Doe
-                </h3>
-                <p className="text-[#DE4313]">Founder & CEO</p>
+                <p className="text-[#DE4313]">CEO</p>
                 <p className="text-gray-700 mt-2">
                   Jane is the visionary behind our platform, with over a decade
                   of experience in the cycling industry. She is passionate about

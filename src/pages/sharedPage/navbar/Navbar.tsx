@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-// import logo from '../../../assets/'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -11,15 +10,15 @@ const Navbar = () => {
 
   return (
     <nav className="bg-[#1A1A2E] shadow-lg">
-      <div className="container mx-auto flex items-center justify-between p-4">
+      <div className="container mx-auto flex items-center justify-between p-3">
         {/* Logo */}
         <div>
-          <NavLink
-            to="/"
-            className="text-[#ECECEC] text-3xl font-bold tracking-wide"
-          >
-            {/* <img src={logo} alt="" /> */}
-            Bike Rental
+          <NavLink to="/">
+            <img
+              src="https://i.ibb.co.com/4M8WDwD/logo.jpg"
+              className="h-16  w-16  rounded-full"
+              alt=""
+            />
           </NavLink>
         </div>
 
@@ -74,7 +73,13 @@ const Navbar = () => {
           >
             Bikes
           </NavLink>
-          {/* Add more links here */}
+          <NavLink
+            to="/dashboard"
+            className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
+            onClick={() => setIsOpen(false)}
+          >
+            Dashboard
+          </NavLink>
         </div>
 
         {/* Authentication Links */}

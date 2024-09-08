@@ -1,19 +1,21 @@
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import {
-  FaUser,
   FaEnvelope,
   FaFacebookF,
   FaGoogle,
   FaGithub,
+  FaLock,
 } from "react-icons/fa";
 import Lottie from "react-lottie";
 import animationData from "../../assets/Animation login - 1724636559571.json";
+import { useLoginMutation } from "@/redux/features/login/login";
+import { useAppDispatch } from "@/redux/hook";
+import { setUser } from "@/redux/features/auth/authSlice";
 
 interface FormData {
-  name: string;
   email: string;
+  password: string;
 }
 
 const defaultOptions = {
@@ -26,6 +28,7 @@ const defaultOptions = {
 };
 
 const Login = () => {
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
@@ -33,10 +36,21 @@ const Login = () => {
   } = useForm<FormData>();
 
   const navigate = useNavigate();
+  const [login, { isError, isLoading }] = useLoginMutation();
+  // console.log(isError, isLoading);
 
-  const onSubmit = (data: FormData) => {
+  const onSubmit = async (data: FormData) => {
     console.log("Form submitted:", data);
-    navigate("/login?success=1");
+    try {
+      const res = await login(data).unwrap();
+      console.log(res.token);
+
+      dispatch(setUser({ user: { email: data.email }, token: res.token }));
+    } catch (error) {
+      console.log(error);
+    }
+
+    navigate("/login");
   };
 
   return (
@@ -55,23 +69,6 @@ const Login = () => {
             Join us and enjoy our services
           </p>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="relative">
-              <FaUser className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
-              <input
-                type="text"
-                {...register("name", { required: "Name is required" })}
-                className={`w-full px-10 py-3 border rounded-full shadow-sm ${
-                  errors.name ? "border-red-500" : "border-gray-300"
-                } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
-                placeholder="Full Name"
-              />
-              {errors.name && (
-                <p className="mt-2 text-sm text-red-600">
-                  {errors.name.message}
-                </p>
-              )}
-            </div>
-
             <div className="relative">
               <FaEnvelope className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
               <input
@@ -94,13 +91,30 @@ const Login = () => {
                 </p>
               )}
             </div>
+            {/* password field  */}
+            <div className="relative">
+              <FaLock className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
+              <input
+                type="password"
+                {...register("password", { required: "Password is required" })}
+                className={`w-full px-10 py-3 border rounded-full shadow-sm ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
+                placeholder="Password"
+              />
+              {errors.password && (
+                <p className="mt-2 text-sm text-red-600">
+                  {errors.password.message}
+                </p>
+              )}
+            </div>
 
             <div>
               <button
                 type="submit"
                 className="w-full px-4 py-3 bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold hover:shadow-xl hover:scale-105 transform duration-400 rounded-full shadow-lg focus:outline-none focus:ring-4 focus:ring-indigo-300 transition-all duration-300 ease-in-out"
               >
-                Sign Up
+                Login
               </button>
             </div>
           </form>

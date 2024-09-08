@@ -1,6 +1,7 @@
 import AllBikes from "./AllBikes";
 import Banner from "./Banner";
 import ContactUs from "./ContactUs";
+import FaqSection from "./FaqSection/FaqSection";
 import Testimonial from "./Testimonial";
 import WhyChooseUs from "./WhyChooseUs";
 
@@ -12,6 +13,7 @@ const Home = () => {
       <Testimonial />
       <WhyChooseUs />
       <ContactUs />
+      <FaqSection />
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useGetAllBikesQuery } from "@/redux/api/api";
+import { useGetAllBikesQuery } from "@/redux/features/getAllBikes/getAllBikes";
 import { NavLink } from "react-router-dom";
 
 const AllBikes = () => {
