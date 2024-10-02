@@ -17,7 +17,8 @@ const DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const ContactSection = () => {
-  const position = [23.8041, 90.4152]; // Default coordinates (latitude, longitude)
+  // (latitude, longitude)
+  const position: [number, number] = [23.8041, 90.4152];
 
   return (
     <div className="min-h-screen">
@@ -25,7 +26,7 @@ const ContactSection = () => {
         <h2 className="text-4xl font-extrabold mb-8 text-center text-[#DE4313]">
           Find Us Here
         </h2>
-        <div className="relative h-96 rounded-lg overflow-hidden shadow-lg">
+        <div className="relative h-[500px] rounded overflow-hidden shadow-lg">
           <MapContainer center={position} zoom={13} className="h-full w-full">
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

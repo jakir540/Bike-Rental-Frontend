@@ -1,10 +1,18 @@
+import DashboardLayout from "@/components/layout/DashboardLayout";
 import MainLayout from "@/components/layout/MainLayout";
+import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import AboutUs from "@/pages/aboutUs/AboutUs";
-import ProfilePage from "@/pages/dashboard/profilePage/ProfilePage";
+import BikeDetails from "@/pages/dashboard/user/components/BikeDetail";
+import ManageBikes from "@/pages/dashboard/admin/manageBikes/ManageBikes";
+import ProfilePage from "@/pages/dashboard/admin/profilePage/ProfilePage";
 import Home from "@/pages/home/Home";
 import Login from "@/pages/login/Login";
 import SignUp from "@/pages/signUp/SignUp";
 import { createBrowserRouter } from "react-router-dom";
+import AllUser from "@/pages/dashboard/admin/allUser/AllUser";
+import AddBike from "@/pages/dashboard/admin/AddBike/AddBike";
+import AllBikes from "@/pages/home/AllBikes";
+import BikeListing from "@/pages/dashboard/user/bikeListing/BikeListing";
 
 const router = createBrowserRouter([
   {
@@ -20,8 +28,16 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
+        path: "bikes/:id",
+        element: <BikeDetails />,
+      },
+      {
         path: "aboutUs",
         element: <AboutUs />,
+      },
+      {
+        path: "bikes",
+        element: <AllBikes />,
       },
       {
         path: "signUp",
@@ -31,9 +47,35 @@ const router = createBrowserRouter([
         path: "login",
         element: <Login />,
       },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
+    children: [
       {
-        path: "dashboard",
+        path: "",
         element: <ProfilePage />,
+      },
+      {
+        path: "add-bike",
+        element: <AddBike />,
+      },
+      {
+        path: "bikes",
+        element: <ManageBikes />,
+      },
+      {
+        path: "users",
+        element: <AllUser />,
+      },
+      {
+        path: "bikeList",
+        element: <BikeListing />,
       },
     ],
   },

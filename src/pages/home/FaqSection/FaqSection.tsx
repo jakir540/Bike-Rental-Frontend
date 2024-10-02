@@ -1,76 +1,79 @@
-import faq from "../../../assets/faq.jpg";
-import { FiChevronDown } from "react-icons/fi"; // Importing an icon for dropdowns
+import { FiChevronDown } from "react-icons/fi";
 
 const FaqSection = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white opacity-90 py-20 ">
+    <div className="min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white py-10">
       {/* Header Section */}
-      <div className="text-center mb-16 space-y-6">
-        <h1 className="text-6xl font-extrabold tracking-tight text-[#F5F5F5]">
-          How can we help you?
+      <div className="text-center mb-20 space-y-8">
+        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">
+          How can we assist you?
         </h1>
-        <p className="text-xl mt-4 text-gray-300">
-          Find answers to your questions or get in touch with support.
+        <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto">
+          Find answers to common questions or get support from our team.
         </p>
 
-        <div className="mt-8 flex justify-center">
+        <div className="mt-10 flex justify-center">
           <input
             type="text"
             placeholder="Describe your issue..."
-            className="w-full md:w-3/4 lg:w-1/2 px-6 py-4 text-gray-900 bg-gradient-to-r from-[#E0F7FA] to-[#FFFFFF] rounded-full shadow-lg border-none focus:outline-none focus:ring-4 focus:ring-[#FF6F61] transition duration-200"
+            className="w-full md:w-2/3 lg:w-1/2 px-8 py-5 text-white bg-white bg-opacity-80 rounded-full shadow-xl border-none focus:outline-none focus:ring-2 focus:ring-[#FF6F61] focus:bg-transparent focus:border-[#FF6F61] transition duration-200 placeholder-gray-500"
           />
         </div>
       </div>
 
       {/* FAQ Section */}
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="bg-white rounded-lg shadow-2xl p-12 text-black">
-          <h2 className="text-4xl font-semibold text-center text-gray-900 mb-12">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="backdrop-filter backdrop-blur-lg bg-white bg-opacity-5 rounded-3xl shadow-2xl p-8 md:p-20">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">
             Browse Help Topics
           </h2>
 
-          <div className="flex justify-center mb-12">
-            <img
-              src={faq}
-              alt="FAQ"
-              className="w-full md:w-3/4 lg:w-1/2 rounded-lg transform transition duration-500 hover:scale-105"
-            />
-          </div>
-
-          <div className="space-y-8">
+          <div className="space-y-6">
             {/* FAQ Item 1 */}
-            <details className="group bg-gradient-to-br from-[#F3F4F6] to-[#E0F7FA] rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300">
-              <summary className="cursor-pointer text-2xl font-medium flex justify-between items-center text-gray-800">
+            <details className="group bg-black bg-opacity-20 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300">
+              <summary className="cursor-pointer text-xl md:text-2xl font-semibold flex justify-between items-center text-white">
                 Fix a problem
-                <FiChevronDown className="group-open:rotate-180 transition-transform duration-200 text-[#4A90E2]" />
+                <FiChevronDown className="group-open:rotate-180 transition-transform duration-200 text-blue-400" />
               </summary>
-              <div className="mt-4 pl-4 text-lg text-gray-700 border-l-4 border-[#FF9A76]">
+              <div className="mt-4 pl-4 text-base md:text-lg text-gray-100 border-l-4 border-blue-400">
                 Troubleshoot video playback issues, fix upload problems, and
-                resolve account issues quickly.
+                resolve account issues efficiently.
               </div>
             </details>
 
             {/* FAQ Item 2 */}
-            <details className="group bg-gradient-to-br from-[#F3F4F6] to-[#E0F7FA] rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300">
-              <summary className="cursor-pointer text-2xl font-medium flex justify-between items-center text-gray-800">
+            <details className="group bg-black  bg-opacity-20 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300">
+              <summary className="cursor-pointer text-xl md:text-2xl font-semibold flex justify-between items-center text-white">
                 Watch videos
-                <FiChevronDown className="group-open:rotate-180 transition-transform duration-200 text-[#8E44AD]" />
+                <FiChevronDown className="group-open:rotate-180 transition-transform duration-200 text-green-400" />
               </summary>
-              <div className="mt-4 pl-4 text-lg text-gray-700 border-l-4 border-[#FF9A76]">
+              <div className="mt-4 pl-4 text-base md:text-lg text-gray-100 border-l-4 border-green-400">
                 Learn how to watch videos on various devices and troubleshoot
                 playback problems.
               </div>
             </details>
 
             {/* FAQ Item 3 */}
-            <details className="group bg-gradient-to-br from-[#F3F4F6] to-[#E0F7FA] rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300">
-              <summary className="cursor-pointer text-2xl font-medium flex justify-between items-center text-gray-800">
+            <details className="group bg-black  bg-opacity-20 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300">
+              <summary className="cursor-pointer text-xl md:text-2xl font-semibold flex justify-between items-center text-white">
                 Manage your account and settings
-                <FiChevronDown className="group-open:rotate-180 transition-transform duration-200 text-[#FF9A76]" />
+                <FiChevronDown className="group-open:rotate-180 transition-transform duration-200 text-yellow-400" />
               </summary>
-              <div className="mt-4 pl-4 text-lg text-gray-700 border-l-4 border-[#FF6F61]">
+              <div className="mt-4 pl-4 text-base md:text-lg text-gray-100 border-l-4 border-yellow-400">
                 Update your account settings, manage privacy preferences, and
                 secure your account.
+              </div>
+            </details>
+
+            {/* FAQ Item 4 */}
+            <details className="group bg-black  bg-opacity-20 rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300">
+              <summary className="cursor-pointer text-xl md:text-2xl font-semibold flex justify-between items-center text-white">
+                Account Recovery
+                <FiChevronDown className="group-open:rotate-180 transition-transform duration-200 text-red-400" />
+              </summary>
+              <div className="mt-4 pl-4 text-base md:text-lg text-gray-100 border-l-4 border-red-400">
+                Steps to recover your account if you've forgotten your password
+                or lost access.
               </div>
             </details>
 

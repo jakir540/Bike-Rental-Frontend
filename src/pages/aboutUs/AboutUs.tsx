@@ -13,7 +13,7 @@ const AboutUs = () => {
           <h1 className="text-5xl font-extrabold mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#DE4313] to-pink-500">
             About Us
           </h1>
-          <div className="relative group overflow-hidden rounded-lg shadow-lg mb-8 object-cover w-full flex justify-center">
+          <div className="relative group overflow-hidden rounded-[8px] shadow-lg mb-8 object-cover w-full flex justify-center">
             <img
               className="rounded transform group-hover:scale-110 transition-transform duration-500"
               src={aboutUs}
@@ -53,7 +53,7 @@ const AboutUs = () => {
             {/* Example Team Member */}
 
             <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
-              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
+              <div className="bg-white rounded-[8px] shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
                 <img
                   src={aboutUs1}
                   alt="Team Member"
@@ -72,7 +72,7 @@ const AboutUs = () => {
             </div>
 
             <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
-              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
+              <div className="bg-white rounded-[8px] shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
                 <img
                   src={aboutUs3}
                   alt="Team Member"
@@ -91,7 +91,7 @@ const AboutUs = () => {
             </div>
 
             <div className="p-4 w-full md:w-1/3 transform hover:-translate-y-2 transition-transform duration-300">
-              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
+              <div className="bg-white rounded-[8px] shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300">
                 <img
                   src={aboutUs2}
                   alt="Team Member"

@@ -10,12 +10,13 @@ const Banner = () => {
         className="absolute inset-0 w-full h-full object-cover"
       >
         <source src={bikeVideo} type="video/mp4" />
-        Your browser does not support the video tag.
       </video>
+
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white bg-black bg-opacity-50">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          <span className="text-[#DE4313] text-[90px]">F</span>ind Your Perfect{" "}
-          <span className="text-[#DE4313] text-[90px]">R</span>
+        <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-bounce">
+          <span className="text-[#DE4313] text-[90px] animate-pulse">F</span>ind
+          Your Perfect{" "}
+          <span className="text-[#DE4313] text-[90px] animate-pulse">R</span>
           ide
         </h1>
         <p className="text-xl md:text-2xl mb-8">

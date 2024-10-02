@@ -36,8 +36,14 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormData>();
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [login, { isError, isLoading }] = useLoginMutation();
+  if (isLoading) {
+    return <p>data is loading......</p>;
+  }
+  if (isError) {
+    return <p>Error data is loading </p>;
+  }
 
   //onsubmit funtion
   const onSubmit = async (data: FormData) => {
@@ -50,11 +56,14 @@ const Login = () => {
     } catch (error) {
       console.log("Login Error:", error);
     }
+    navigate("/dashboard");
   };
 
   return (
     <div className="min-h-screen shadow-lg bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] py-10">
-      <h2 className="text-5xl font-bold text-center mb-8 text-white">Login</h2>
+      <h2 className="text-5xl font-bold text-center mb-8 text-white">
+        Login Here
+      </h2>
 
       <div className="flex items-center justify-around  p-6 py-16">
         <div className="">
