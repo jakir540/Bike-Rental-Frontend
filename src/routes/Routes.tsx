@@ -13,6 +13,7 @@ import AllUser from "@/pages/dashboard/admin/allUser/AllUser";
 import AddBike from "@/pages/dashboard/admin/AddBike/AddBike";
 import AllBikes from "@/pages/home/AllBikes";
 import BikeListing from "@/pages/dashboard/user/bikeListing/BikeListing";
+import MyRentals from "@/pages/dashboard/user/myRental/MyRentals";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,10 @@ const router = createBrowserRouter([
       {
         path: "bikeList",
         element: <BikeListing />,
+      },
+      {
+        path: "rentals",
+        element: <MyRentals />,
       },
     ],
   },

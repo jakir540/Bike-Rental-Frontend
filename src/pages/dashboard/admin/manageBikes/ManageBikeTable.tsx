@@ -46,12 +46,12 @@ const ManageBikeTable = ({ bike }: { bike: TBike }) => {
         <td className="py-4 px-6">
           <span
             className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-              bike?.availability === "available"
+              bike?.isAvailable === true
                 ? "bg-green-100 text-green-800"
                 : "bg-red-100 text-red-800"
             }`}
           >
-            {bike?.availability === "available" ? "Available" : "Unavailable"}
+            {bike?.isAvailable === true ? "Available" : "Unavailable"}
           </span>
         </td>
         <td className="py-4 px-6">

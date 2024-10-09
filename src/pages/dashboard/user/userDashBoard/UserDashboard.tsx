@@ -16,18 +16,7 @@ const UserDashboard = () => {
             <span className="ml-4">User Profile</span>
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to="/dashboard/rental"
-            className={({ isActive }) =>
-              isActive
-                ? "text-[#DE4313] flex items-center p-2 rounded-[20px] bg-gray-700"
-                : "flex items-center p-2 rounded-[20px] hover:bg-gray-700 transition-colors"
-            }
-          >
-            <span className="ml-4">Rental</span>
-          </NavLink>
-        </li>
+
         <li>
           <NavLink
             to="/dashboard/bikeList"
@@ -42,6 +31,18 @@ const UserDashboard = () => {
         </li>
         <li>
           <NavLink
+            to="/dashboard/rentals"
+            className={({ isActive }) =>
+              isActive
+                ? "text-[#DE4313] flex items-center p-2 rounded-[20px] bg-gray-700"
+                : "flex items-center p-2 rounded-[20px] hover:bg-gray-700 transition-colors"
+            }
+          >
+            <span className="ml-4">Rental</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink
             to="/"
             className={({ isActive }) =>
               isActive
@@ -52,8 +53,6 @@ const UserDashboard = () => {
             <span className="ml-4">Home</span>
           </NavLink>
         </li>
-
-        {/* Add more user-specific routes here */}
       </ul>
     </nav>
   );

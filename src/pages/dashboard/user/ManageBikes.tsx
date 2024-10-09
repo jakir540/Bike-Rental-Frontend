@@ -1,15 +1,16 @@
-import { useGetAllBikesQuery } from "@/redux/features/Bikes/getAllBikes";
+import { useGetAllBikesQuery } from "@/redux/features/Bikes/Bikes";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 const ManageBikes = () => {
   const { data, isLoading, isError } = useGetAllBikesQuery(undefined);
+  console.log("data form dashUs", data);
 
   // State for filters
   const [filter, setFilter] = useState({
     brand: "",
     model: "",
-    availability: "",
+    isAvailable: "",
   });
 
   if (isLoading)
@@ -26,6 +27,7 @@ const ManageBikes = () => {
     );
 
   const bikes = data?.data || [];
+  console.log("form dash", { bikes });
 
   console.log(data.data);
 
@@ -37,12 +39,13 @@ const ManageBikes = () => {
     const matchesModel = filter.model
       ? bike.model.includes(filter.model)
       : true;
-    const matchesAvailability = filter.availability
-      ? bike.availability === filter.availability
+    const matchesAvailability = filter.isAvailable
+      ? bike.isAvailable === filter.isAvailable
       : true;
     return matchesBrand && matchesModel && matchesAvailability;
   });
 
+  console.log({ filteredBikes });
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       {/* Filter Section */}
@@ -97,9 +100,9 @@ const ManageBikes = () => {
             </label>
             <select
               id="availability"
-              value={filter.availability}
+              value={filter.isAvailable}
               onChange={(e) =>
-                setFilter({ ...filter, availability: e.target.value })
+                setFilter({ ...filter, isAvailable: e.target.value })
               }
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#DE4313] focus:ring-[#DE4313] sm:text-sm"
             >
@@ -136,6 +139,7 @@ const ManageBikes = () => {
               </th>
             </tr>
           </thead>
+
           <tbody>
             {filteredBikes.length === 0 ? (
               <tr>
@@ -159,14 +163,12 @@ const ManageBikes = () => {
                   <td className="py-4 px-6">
                     <span
                       className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                        bike.availability === "available"
+                        bike.isAvailable === true
                           ? "bg-green-100 text-green-800"
                           : "bg-red-100 text-red-800"
                       }`}
                     >
-                      {bike.availability === "available"
-                        ? "Available"
-                        : "Unavailable"}
+                      {bike.isAvailable === true ? "Available" : "Unavailable"}
                     </span>
                   </td>
                   <td className="py-4 px-6">

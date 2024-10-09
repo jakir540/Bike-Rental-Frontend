@@ -1,3 +1,5 @@
+import { logOut, useCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
@@ -8,16 +10,25 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
+  const user = useAppSelector(useCurrentUser);
+  const dispatch = useAppDispatch();
+
+  const handleSignOut = () => {
+    dispatch(logOut());
+    //todo
+    // add to redirect login page
+  };
+
   return (
-    <nav className="bg-[#1A1A2E] shadow-lg ">
-      <div className="container mx-auto flex items-center justify-between p-3">
+    <nav className="bg-[#1A1A2E] shadow-lg px-5">
+      <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo */}
         <div>
           <NavLink to="/">
             <img
               src="https://i.ibb.co.com/4M8WDwD/logo.jpg"
-              className="h-16  w-16  rounded-full"
-              alt=""
+              className="h-12 w-12 rounded-full"
+              alt="Logo"
             />
           </NavLink>
         </div>
@@ -46,81 +57,100 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Menu Items */}
-        <div
-          className={`${
-            isOpen ? "block" : "hidden"
-          } md:flex space-x-8 items-center`}
-        >
+        {/* Menu Items (Desktop) */}
+        <div className="hidden md:flex space-x-8 items-center">
           <NavLink
             to="/"
             className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
-            onClick={() => setIsOpen(false)}
           >
             Home
           </NavLink>
           <NavLink
             to="/aboutUs"
             className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
-            onClick={() => setIsOpen(false)}
           >
             About Us
           </NavLink>
           <NavLink
             to="/bikes"
             className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
-            onClick={() => setIsOpen(false)}
           >
             Bikes
           </NavLink>
-          <NavLink
-            to="/dashboard"
-            className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
-            onClick={() => setIsOpen(false)}
-          >
-            Dashboard
-          </NavLink>
-        </div>
+          {user && (
+            <NavLink
+              to="/dashboard"
+              className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
+              onClick={() => setIsOpen(false)}
+            >
+              Dashboard
+            </NavLink>
+          )}
 
-        {/* Authentication Links */}
-        <div className="hidden md:flex space-x-4 items-center">
-          <NavLink
-            to="/login"
-            className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold py-3 px-8 rounded shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-400"
-          >
-            Login
-          </NavLink>
-          <NavLink
-            to="/signUp"
-            className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold py-3 px-8 rounded shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-400"
-          >
-            Sign Up
-          </NavLink>
-
-          {/* If logged in (conditional rendering) */}
-          {/* Uncomment and use logic based on user authentication status */}
-          {/* <NavLink to="/logout" className="bg-[#DE4313] text-white py-2 px-4 rounded-full hover:bg-[#FF6F61] transition-colors duration-300 shadow-md">Logout</NavLink> */}
+          {/* Authentication Button */}
+          {!user ? (
+            <NavLink
+              to="/login"
+              className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold py-2 px-6 rounded shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300"
+            >
+              Login
+            </NavLink>
+          ) : (
+            <button
+              onClick={handleSignOut}
+              className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold py-2 px-6 rounded shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300"
+            >
+              Sign Out
+            </button>
+          )}
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-[#1A1A2E]">
+        <div className="md:hidden bg-[#1A1A2E] p-4">
           <NavLink
-            to="/login"
+            to="/"
             className="block text-[#ECECEC] py-2 px-4 hover:text-[#FF6F61] transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
-            Login
+            Home
           </NavLink>
           <NavLink
-            to="/signup"
+            to="/aboutUs"
             className="block text-[#ECECEC] py-2 px-4 hover:text-[#FF6F61] transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
-            Sign Up
+            About Us
           </NavLink>
-          {/* Add more mobile links as necessary */}
+          <NavLink
+            to="/bikes"
+            className="block text-[#ECECEC] py-2 px-4 hover:text-[#FF6F61] transition-colors duration-300"
+            onClick={() => setIsOpen(false)}
+          >
+            Bikes
+          </NavLink>
+
+          {/* Authentication Button (Mobile) */}
+          {!user ? (
+            <NavLink
+              to="/login"
+              className="block bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold py-2 px-4 mt-4 rounded shadow-lg"
+              onClick={() => setIsOpen(false)}
+            >
+              Login
+            </NavLink>
+          ) : (
+            <button
+              onClick={() => {
+                handleSignOut();
+                setIsOpen(false);
+              }}
+              className="block bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold py-2 px-4 mt-4 rounded shadow-lg"
+            >
+              Sign Out
+            </button>
+          )}
         </div>
       )}
     </nav>

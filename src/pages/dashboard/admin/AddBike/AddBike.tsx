@@ -1,15 +1,22 @@
 import { useCreateBikeMutation } from "@/redux/features/Bikes/Bikes";
-import { useForm } from "react-hook-form";
+import { TBike } from "@/types";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 function AddBike() {
-  const { register, handleSubmit, reset } = useForm();
+  // Specify the form type as TBike
+  const { register, handleSubmit, reset } = useForm<TBike>();
   const [createBike, { isLoading, isSuccess, isError }] =
     useCreateBikeMutation();
 
-  const onSubmit = async (data) => {
+  const onSubmit: SubmitHandler<TBike> = async (data) => {
+    const bikeData = {
+      ...data,
+      cc: Number(data.cc),
+      pricePerHour: Number(data.pricePerHour),
+    };
     try {
       // Trigger the create bike mutation
-      const response = await createBike(data).unwrap();
+      const response = await createBike(bikeData).unwrap();
 
       console.log("Bike added successfully:", response);
       // Reset form if submission is successful
@@ -66,7 +73,7 @@ function AddBike() {
         <div className="flex flex-col">
           <label className="block mb-2 font-medium text-gray-600">Price</label>
           <input
-            {...register("price", { required: true })}
+            {...register("pricePerHour", { required: true })}
             type="number"
             className="w-full border border-gray-300 rounded-[8px] p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66] transition-all duration-300"
             placeholder="Enter Bike Price"
@@ -123,7 +130,7 @@ function AddBike() {
             Image URL
           </label>
           <input
-            {...register("imageUrl", { required: true })}
+            {...register("image", { required: true })}
             type="url"
             className="w-full border border-gray-300 rounded-[8px] p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66] transition-all duration-300"
             placeholder="Enter Image URL"

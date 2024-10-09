@@ -1,6 +1,6 @@
 import { baseApi } from "@/redux/api/baseApi";
 
-const getAllBikesApi = baseApi.injectEndpoints({
+const AllBikesApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createBike: builder.mutation({
       query: (bikeData) => ({
@@ -48,4 +48,4 @@ export const {
   useUpdateBikeMutation,
   useDeleteBikeMutation,
   useCreateBikeMutation,
-} = getAllBikesApi;
+} = AllBikesApi;

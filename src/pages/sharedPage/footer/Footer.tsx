@@ -24,7 +24,7 @@ const Footer = () => {
       {/* Footer Content */}
       <footer className="relative z-10 text-gray-500 body-font bg-[#1A1A2E] bg-opacity-80">
         <div className="container px-5 py-12 mx-auto">
-          <div className="flex items-center justify-center md:text-left text-center -mb-10 -mx-4">
+          <div className="md:flex items-center justify-center md:text-left text-center lg:-mb-10 -mx-4">
             <FooterLinks />
             <PrivacyPolicy />
             <ContactUs />
@@ -33,8 +33,8 @@ const Footer = () => {
 
         <div className="border-t border-gray-800">
           <div className="container px-5 py-8 flex flex-wrap mx-auto items-center justify-between">
-            <div className="flex md:flex-nowrap flex-wrap justify-center items-end md:justify-start">
-              <div className="relative sm:w-64 w-40 sm:mr-4 mr-2">
+            <div className="flex flex-col sm:flex-row md:flex-nowrap flex-wrap justify-center items-center md:justify-start w-full md:w-auto space-y-4 sm:space-y-0">
+              <div className="relative sm:w-64 w-full sm:mr-4 mr-2">
                 <label
                   htmlFor="footer-field"
                   className="leading-7 text-sm text-gray-400"
@@ -49,14 +49,16 @@ const Footer = () => {
                   className="w-full bg-gray-800 bg-opacity-40 rounded-full border border-gray-700 focus:ring-2 focus:ring-[#FF6F61] focus:bg-transparent focus:border-[#FF6F61] text-base outline-none text-gray-100 py-2 px-4 leading-8 transition-colors duration-200 ease-in-out"
                 />
               </div>
+
               <button className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold py-3 px-8 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-300">
                 Subscribe
               </button>
             </div>
+
             <span className="inline-flex justify-center md:justify-start mt-6 md:mt-0 w-full md:w-auto">
               {["facebook", "twitter", "instagram", "linkedin"].map((icon) => (
                 <a key={icon} href="#" className="relative group ml-3">
-                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold rounded-full transition-all duration-300 transform group-hover:scale-110 group-hover:shadow-lg">
+                  <div className="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold rounded-full transition-all duration-300 transform group-hover:scale-110 group-hover:shadow-lg">
                     <svg
                       fill="white"
                       strokeLinecap="round"
@@ -86,8 +88,8 @@ const Footer = () => {
         </div>
 
         <div className="bg-gray-800 bg-opacity-75">
-          <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row justify-between">
-            <p className="text-gray-400 text-sm text-center sm:text-left">
+          <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row justify-between text-center sm:text-left">
+            <p className="text-gray-400 text-sm">
               © 2024 JackMart
               <a
                 href="https://twitter.com/yourcompany"
@@ -98,7 +100,7 @@ const Footer = () => {
                 @bikerentalshop
               </a>
             </p>
-            <span className="sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full text-center text-gray-400 text-sm">
+            <span className="sm:ml-auto mt-2 sm:mt-0 w-full sm:w-auto text-gray-400 text-sm">
               Your go-to destination for premium bike rentals and accessories.
             </span>
           </div>

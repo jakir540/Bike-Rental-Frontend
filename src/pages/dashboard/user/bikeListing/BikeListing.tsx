@@ -33,12 +33,17 @@ const BikeListing = () => {
     const matchesBrand = filter.brand
       ? bike.brand.toLowerCase().includes(filter.brand.toLowerCase())
       : true;
+
     const matchesModel = filter.model
       ? bike.model.toLowerCase().includes(filter.model.toLowerCase())
       : true;
+
     const matchesAvailability = filter.availability
-      ? bike?.availability === filter.availability
+      ? filter.availability === "available"
+        ? bike.isAvailable === true
+        : bike.isAvailable === false
       : true;
+
     return matchesBrand && matchesModel && matchesAvailability;
   });
 
@@ -46,9 +51,7 @@ const BikeListing = () => {
     <div className="min-h-screen bg-gray-100 p-8">
       {/* Filter Section */}
       <div className="bg-white p-6 rounded-lg shadow-md mb-6">
-        <h2 className="text-xl font-semibold mb-4 text-[#DE4313]">
-          Filter Bikes
-        </h2>
+        <h2 className="text-2xl font-bold mb-4 text-[#DE4313]">Filter Bikes</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Brand Filter */}
           <div>
@@ -64,7 +67,7 @@ const BikeListing = () => {
               placeholder="e.g., Yamaha"
               value={filter.brand}
               onChange={(e) => setFilter({ ...filter, brand: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#DE4313] focus:ring-[#DE4313] sm:text-sm"
+              className="mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-[#DE4313] focus:ring-[#DE4313] sm:text-sm"
             />
           </div>
 
@@ -82,7 +85,7 @@ const BikeListing = () => {
               placeholder="e.g., MT-15"
               value={filter.model}
               onChange={(e) => setFilter({ ...filter, model: e.target.value })}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#DE4313] focus:ring-[#DE4313] sm:text-sm"
+              className="mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-[#DE4313] focus:ring-[#DE4313] sm:text-sm"
             />
           </div>
 
@@ -100,7 +103,7 @@ const BikeListing = () => {
               onChange={(e) =>
                 setFilter({ ...filter, availability: e.target.value })
               }
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#DE4313] focus:ring-[#DE4313] sm:text-sm"
+              className="mt-1 block p-2 w-full rounded-md border-gray-300 shadow-sm focus:border-[#DE4313] focus:ring-[#DE4313] sm:text-sm"
             >
               <option value="">All</option>
               <option value="available">Available</option>
@@ -164,7 +167,7 @@ const BikeListing = () => {
                   <td className="py-3 px-6">{bike.cc} CC</td>
                   <td className="py-3 px-6">{bike.year}</td>
                   <td className="py-3 px-6">
-                    {bike.availability === "available" ? (
+                    {bike.isAvailable === true ? (
                       <span className="text-green-600 font-semibold">
                         Available
                       </span>
