@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   useDeleteUserMutation,
   useGetAllusersQuery,
   usePromoteUserToAdminMutation,
 } from "@/redux/features/users/showProfile/user";
 import toast from "react-hot-toast";
+import Loading from "@/components/loadingPage/Loading";
 
 const AllUser = () => {
   const { data, isLoading, isError, error } = useGetAllusersQuery("");
@@ -19,7 +20,7 @@ const AllUser = () => {
 
   const users = data?.data;
 
-  if (isLoading) return <p>Loading users...</p>;
+  if (isLoading) return <Loading />;
   if (isError) return <p>Error: {error?.message}</p>;
 
   // Handle user role update

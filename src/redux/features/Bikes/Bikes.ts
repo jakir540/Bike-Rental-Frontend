@@ -7,15 +7,15 @@ const AllBikesApi = baseApi.injectEndpoints({
         url: "/bikes",
         method: "POST",
         body: bikeData,
-        providesTags: ["bike"],
       }),
+      invalidatesTags: ["bike"],
     }),
     getAllBikes: builder.query({
       query: () => ({
         url: "/bikes",
         method: "GET",
-        providesTags: ["bike"],
       }),
+      providesTags: ["bike"],
     }),
 
     getSingleBike: builder.query({
@@ -29,15 +29,15 @@ const AllBikesApi = baseApi.injectEndpoints({
         url: `/bikes/${id}`,
         method: "PUT",
         body: updateData,
-        providesTags: ["bike"],
       }),
+      invalidatesTags: ["bike"],
     }),
     deleteBike: builder.mutation({
       query: (id) => ({
         url: `/bikes/${id}`,
         method: "DELETE",
-        providesTags: ["bike"],
       }),
+      invalidatesTags: ["bike"],
     }),
   }),
 });

@@ -79,8 +79,8 @@ const ManageBikeTable = ({ bike }: { bike: TBike }) => {
       {/* Modal */}
       {isModalOpen && (
         <UpdateBikeModal
-          bike={selectedBike} // Pass selected bike data
-          onClose={() => setIsModalOpen(false)} // Close modal handler
+          bike={selectedBike}
+          onClose={() => setIsModalOpen(false)}
         />
       )}
     </>

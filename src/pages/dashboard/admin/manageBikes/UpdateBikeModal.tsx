@@ -4,30 +4,43 @@ import { TBike } from "@/types";
 
 const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
   const [updateBike] = useUpdateBikeMutation();
+
+  // Initializing form data with the bike's current data
   const [formData, setFormData] = useState({
     brand: bike.brand,
     model: bike.model,
     pricePerHour: Number(bike.pricePerHour),
     cc: bike.cc,
     year: bike.year,
-    availability: bike?.availability,
+    isAvailable: bike?.isAvailable,
   });
 
-  // Handle form changes
-  const handleChange = (e) => {
+  // Handle form field changes
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
+
+    // Update the form data based on the field
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name === "pricePerHour" || name === "cc" ? Number(value) : value,
     });
   };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Convert year to string
+    const updatedData = {
+      ...formData,
+      year: String(formData.year),
+    };
+
     try {
-      console.log(formData);
-      await updateBike({ id: bike._id, updateData: formData }).unwrap();
+      console.log(updatedData); // Check the data before submitting
+      await updateBike({ id: bike._id, updateData: updatedData }).unwrap();
       onClose();
     } catch (error) {
       console.error("Failed to update the bike", error);
@@ -46,7 +59,10 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
         <h2 className="text-2xl font-semibold mb-4 text-[#DE4313]">
           Update Bike
         </h2>
+
+        {/* Form */}
         <form onSubmit={handleSubmit}>
+          {/* Brand */}
           <div className="mb-4">
             <label
               htmlFor="brand"
@@ -64,6 +80,7 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
             />
           </div>
 
+          {/* Model */}
           <div className="mb-4">
             <label
               htmlFor="model"
@@ -81,6 +98,7 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
             />
           </div>
 
+          {/* Price per hour */}
           <div className="mb-4">
             <label
               htmlFor="pricePerHour"
@@ -98,6 +116,7 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
             />
           </div>
 
+          {/* CC */}
           <div className="mb-4">
             <label
               htmlFor="cc"
@@ -115,6 +134,7 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
             />
           </div>
 
+          {/* Year */}
           <div className="mb-4">
             <label
               htmlFor="year"
@@ -132,17 +152,18 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
             />
           </div>
 
+          {/* Availability */}
           <div className="mb-4">
             <label
-              htmlFor="availability"
+              htmlFor="isAvailable"
               className="block text-sm font-medium text-gray-700"
             >
               Availability
             </label>
             <select
-              id="availability"
-              name="availability"
-              value={formData.availability}
+              id="isAvailable"
+              name="isAvailable"
+              value={formData.isAvailable}
               onChange={handleChange}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#DE4313] focus:ring-[#DE4313]"
             >
@@ -151,6 +172,7 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
             </select>
           </div>
 
+          {/* Submit Button */}
           <button
             type="submit"
             className="w-full bg-[#DE4313] text-white py-2 px-4 rounded-lg hover:bg-opacity-90 transition"
