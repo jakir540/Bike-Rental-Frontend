@@ -14,6 +14,7 @@ import AddBike from "@/pages/dashboard/admin/AddBike/AddBike";
 import AllBikes from "@/pages/home/AllBikes";
 import BikeListing from "@/pages/dashboard/user/bikeListing/BikeListing";
 import MyRentals from "@/pages/dashboard/user/myRental/MyRentals";
+import ReturnBike from "@/pages/dashboard/admin/adminDashboard/returnBike/ReturnBike";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "bikes",
         element: <ManageBikes />,
+      },
+      {
+        path: "return-bike",
+        element: <ReturnBike />,
       },
       {
         path: "users",

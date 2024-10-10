@@ -7,8 +7,18 @@ const showProfile = baseApi.injectEndpoints({
         method: "GET",
         url: "/users/me",
       }),
+      providesTags: ["user"],
+    }),
+    updateProfile: builder.mutation({
+      query: (data) => ({
+        method: "PUT",
+        url: "/users/me",
+        body: data,
+      }),
+      invalidatesTags: ["user"],
     }),
   }),
 });
 
-export const { useShowProfileQuery } = showProfile;
+// https://bike-rental-app-mu.vercel.app/api/users/me
+export const { useShowProfileQuery, useUpdateProfileMutation } = showProfile;

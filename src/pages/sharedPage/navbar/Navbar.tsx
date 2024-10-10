@@ -1,10 +1,11 @@
 import { logOut, useCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -17,6 +18,7 @@ const Navbar = () => {
     dispatch(logOut());
     //todo
     // add to redirect login page
+    navigate("/login");
   };
 
   return (

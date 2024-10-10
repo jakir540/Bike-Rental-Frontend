@@ -54,7 +54,7 @@ const AllUser = () => {
         {users?.map((user, index) => (
           <form
             key={user.id}
-            className="p-6 bg-white shadow-md rounded-lg border border-gray-200"
+            className="p-6 bg-white shadow-md rounded-[8px] border border-gray-200"
           >
             <h3 className="text-xl font-bold mb-4">
               User {index + 1}: {user.name}
@@ -122,11 +122,10 @@ const AllUser = () => {
               </div>
             </div>
 
-            {/* Delete User Action */}
             <div className="mt-6">
               <button
                 type="button"
-                className="inline-flex items-center px-4 py-2 text-white bg-red-600 rounded-md shadow-sm hover:bg-red-500"
+                className="inline-flex items-center px-4 py-2 text-white bg-red-600 rounded-[6px] shadow-sm hover:bg-red-500"
                 onClick={() => {
                   setUserInfo(user);
                   setModalOpen(true); // Open the modal
@@ -142,7 +141,7 @@ const AllUser = () => {
       {/* Delete Confirmation Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm">
+          <div className="bg-white p-6 rounded-[8px] shadow-lg max-w-sm">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">
               Are you sure you want to delete this user?
             </h2>
