@@ -1,6 +1,37 @@
+import React, { FormEvent, useState } from "react";
 import bikeVideo from "../../assets/video_bike.mp4";
+import { useGetAllBikesQuery } from "@/redux/features/Bikes/Bikes";
+import { TBike } from "@/types";
+import toast from "react-hot-toast";
 
 const Banner = () => {
+  const { data } = useGetAllBikesQuery(undefined);
+  const bikes = data?.data || [];
+
+  // State for filters
+  const [filter, setFilter] = useState({
+    brand: "",
+  });
+
+  // Handle search on form submission
+  const handleSearch = (e: FormEvent) => {
+    e.preventDefault();
+    const matches = bikes.filter((bike: TBike) => {
+      const matchesBrand = filter.brand
+        ? bike.brand.toLowerCase().includes(filter.brand.toLowerCase())
+        : true;
+
+      return matchesBrand;
+    });
+
+    if (matches.length > 0) {
+      toast.success("Bike is available! in our store 🚴‍♂️");
+      setFilter({ brand: "" });
+    } else {
+      toast.error("No bike found! 😞");
+    }
+  };
+
   return (
     <div className="relative w-full h-screen overflow-hidden">
       <video
@@ -19,12 +50,25 @@ const Banner = () => {
           <span className="text-[#DE4313] text-[90px] animate-pulse">R</span>
           ide
         </h1>
-        <p className="text-xl md:text-2xl mb-8">
-          Check bike availability in your area
-        </p>
-        <button className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-semibold py-3 px-8 rounded shadow-lg hover:shadow-xl hover:scale-105 transform transition-all duration-400">
-          Search Bikes
-        </button>
+
+        {/* Search Form */}
+        <form onSubmit={handleSearch} className="lg:w-full max-w-md">
+          <div className="flex items-center border-b-2 border-[#DE4313] py-2">
+            <input
+              type="text"
+              placeholder="Enter the Bike Brand Name"
+              value={filter.brand}
+              onChange={(e) => setFilter({ ...filter, brand: e.target.value })}
+              className="bg-transparent border-none text-white placeholder-white focus:outline-none flex-1"
+            />
+            <button
+              type="submit"
+              className="bg-[#DE4313] text-white px-4 py-2 rounded hover:bg-[#FF6F61] transition duration-300"
+            >
+              Search
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   );

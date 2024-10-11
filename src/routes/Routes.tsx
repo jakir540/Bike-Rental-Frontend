@@ -15,15 +15,13 @@ import AllBikes from "@/pages/home/AllBikes";
 import BikeListing from "@/pages/dashboard/user/bikeListing/BikeListing";
 import MyRentals from "@/pages/dashboard/user/myRental/MyRentals";
 import ReturnBike from "@/pages/dashboard/admin/adminDashboard/returnBike/ReturnBike";
+import ErrorPage from "@/pages/dashboard/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <div>
-        <MainLayout />
-      </div>
-    ),
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

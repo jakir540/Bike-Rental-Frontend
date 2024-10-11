@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useUpdateBikeMutation } from "@/redux/features/Bikes/Bikes";
 import { TBike } from "@/types";
+import toast from "react-hot-toast";
 
 const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
   const [updateBike] = useUpdateBikeMutation();
@@ -41,6 +42,7 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
     try {
       console.log(updatedData); // Check the data before submitting
       await updateBike({ id: bike._id, updateData: updatedData }).unwrap();
+      toast.success("Bike update successfully!");
       onClose();
     } catch (error) {
       console.error("Failed to update the bike", error);
