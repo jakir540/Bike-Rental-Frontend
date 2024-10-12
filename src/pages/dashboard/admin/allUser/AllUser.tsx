@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import {
   useDeleteUserMutation,
@@ -6,11 +7,12 @@ import {
 } from "@/redux/features/users/showProfile/user";
 import toast from "react-hot-toast";
 import Loading from "@/components/loadingPage/Loading";
+import { IUser } from "@/types";
+import ErrorPage from "../../ErrorPage/ErrorPage";
 
 const AllUser = () => {
   const { data, isLoading, isError, error } = useGetAllusersQuery("");
-  const [updateUserRole, { isLoading: isUpdating }] =
-    usePromoteUserToAdminMutation();
+  const [updateUserRole] = usePromoteUserToAdminMutation();
 
   const [deleteUser] = useDeleteUserMutation();
 
@@ -19,9 +21,10 @@ const AllUser = () => {
   const [isModalOpen, setModalOpen] = useState(false); // Modal state
 
   const users = data?.data;
+  console.log(error);
 
   if (isLoading) return <Loading />;
-  if (isError) return <p>Error: {error?.message}</p>;
+  if (isError) return <ErrorPage />;
 
   // Handle user role update
   const handleRoleChange = async (userId: string, role: string) => {
@@ -52,7 +55,7 @@ const AllUser = () => {
     <div className="container mx-auto p-6">
       <h2 className="text-3xl font-semibold mb-6 text-center">All Users</h2>
       <div className="space-y-8">
-        {users?.map((user, index) => (
+        {users?.map((user: IUser, index: number) => (
           <form
             key={user.id}
             className="p-6 bg-white shadow-md rounded-[8px] border border-gray-200"

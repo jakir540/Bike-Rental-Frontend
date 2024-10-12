@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import bikeVideo from "../../assets/video_bike.mp4";
 import { useGetAllBikesQuery } from "@/redux/features/Bikes/Bikes";
 import { TBike } from "@/types";

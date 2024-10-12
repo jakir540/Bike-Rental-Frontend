@@ -65,7 +65,7 @@ function AddBike() {
             {...register("description", { required: true })}
             className="w-full border border-gray-300 rounded-[8px] p-4 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66] transition-all duration-300"
             placeholder="Enter Bike Description"
-            rows="4"
+            rows={4}
           />
         </div>
 

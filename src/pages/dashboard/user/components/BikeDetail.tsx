@@ -109,12 +109,21 @@ const BikeDetail = () => {
             </p>
 
             {/* Book Now Button */}
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-bold py-3 px-6 rounded-[8px] shadow-lg hover:shadow-2xl transition transform hover:scale-110 duration-300"
-            >
-              Book Now
-            </button>
+            {bike.isAvailable ? (
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-bold py-3 px-6 rounded-[8px] shadow-lg hover:shadow-2xl transition transform hover:scale-110 duration-300"
+              >
+                Book Now
+              </button>
+            ) : (
+              <button
+                disabled
+                className="bg-gray-300 text-gray-500 font-bold py-3 px-6 rounded-[8px] shadow-lg transition duration-300 cursor-not-allowed"
+              >
+                Unavailable
+              </button>
+            )}
           </div>
         </div>
       </div>

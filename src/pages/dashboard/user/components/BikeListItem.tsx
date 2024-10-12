@@ -26,8 +26,7 @@ const BikeListItem = ({ bike }: BikeListItemProps) => {
         possimus ex amet illo eveniet.
       </p>
       <p className="text-gray-700">
-        Availability:{" "}
-        {bike.availability === "available" ? "Available" : "Unavailable"}
+        Availability: {bike.isAvailable === true ? "Available" : "Unavailable"}
       </p>
 
       {/* View Detail Button */}

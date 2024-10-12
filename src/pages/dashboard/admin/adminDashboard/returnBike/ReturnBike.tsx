@@ -3,6 +3,7 @@ import {
   useGetAllBookingsQuery,
   useReturnBikeMutation,
 } from "@/redux/features/bookingBike/bookingBike";
+import { TRental } from "@/types";
 import { CheckCheck, CornerUpLeft } from "lucide-react";
 import toast from "react-hot-toast";
 
@@ -59,7 +60,7 @@ const ReturnBike = () => {
           </thead>
           <tbody>
             {allRentals.length > 0 ? (
-              allRentals.map((rental) => (
+              allRentals.map((rental: TRental) => (
                 <tr
                   key={rental._id}
                   className="border-b border-gray-200 hover:bg-gray-100 transition-colors duration-200"

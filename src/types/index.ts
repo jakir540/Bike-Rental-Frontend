@@ -21,3 +21,12 @@ export type TRental = {
   isReturned?: boolean;
   isPaid?: boolean;
 };
+
+export interface IUser {
+  _id?: string;
+  id: string;
+  name: string;
+  email: string;
+  role: "admin" | "user";
+  active: boolean;
+}

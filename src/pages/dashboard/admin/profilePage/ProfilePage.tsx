@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useShowProfileQuery } from "@/redux/features/users/showProfile/showProfileApi";
 import UpdateProfileModal from "./UpdateProfileModal";
 

@@ -3,7 +3,12 @@ import { useUpdateBikeMutation } from "@/redux/features/Bikes/Bikes";
 import { TBike } from "@/types";
 import toast from "react-hot-toast";
 
-const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
+interface UpdateBikeModalProps {
+  bike: TBike;
+  onClose: () => void; // Declare onClose as a function type
+}
+
+const UpdateBikeModal = ({ bike, onClose }: UpdateBikeModalProps) => {
   const [updateBike] = useUpdateBikeMutation();
 
   // Initializing form data with the bike's current data
@@ -13,7 +18,7 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
     pricePerHour: Number(bike.pricePerHour),
     cc: bike.cc,
     year: bike.year,
-    isAvailable: bike?.isAvailable,
+    isAvailable: bike.isAvailable ? "available" : "unavailable",
   });
 
   // Handle form field changes
@@ -29,20 +34,32 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
     });
   };
 
+  // Handle form field changes for availability specifically
+  const handleAvailabilityChange = (
+    e: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const { value } = e.target;
+    setFormData({
+      ...formData,
+      isAvailable: value === "available" ? "available" : "unavailable", // Convert selection to string
+    });
+  };
+
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Convert year to string
+    // Convert string year and isAvailable (back to boolean)
     const updatedData = {
       ...formData,
       year: String(formData.year),
+      isAvailable: formData.isAvailable === "available", // Convert string back to boolean
     };
 
     try {
       console.log(updatedData); // Check the data before submitting
       await updateBike({ id: bike._id, updateData: updatedData }).unwrap();
-      toast.success("Bike update successfully!");
+      toast.success("Bike updated successfully!");
       onClose();
     } catch (error) {
       console.error("Failed to update the bike", error);
@@ -166,7 +183,7 @@ const UpdateBikeModal = ({ bike, onClose }: { bike: TBike }) => {
               id="isAvailable"
               name="isAvailable"
               value={formData.isAvailable}
-              onChange={handleChange}
+              onChange={handleAvailabilityChange} // Separate handler for availability
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#DE4313] focus:ring-[#DE4313]"
             >
               <option value="available">Available</option>

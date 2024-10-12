@@ -5,13 +5,13 @@ import { TBike } from "@/types";
 import { useDeleteBikeMutation } from "@/redux/features/Bikes/Bikes";
 
 const ManageBikeTable = ({ bike }: { bike: TBike }) => {
-  const [selectedBike, setSelectedBike] = useState(null);
+  // Initialize selectedBike as TBike | null
+  const [selectedBike, setSelectedBike] = useState<TBike | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deleteBike] = useDeleteBikeMutation();
 
-  // Open modal and set selected bike data
-  const handleUpdateClick = (bike: any) => {
-    setSelectedBike(bike);
+  const handleUpdateClick = (bike: TBike) => {
+    setSelectedBike(bike); // This will set selectedBike as TBike
     setIsModalOpen(true);
   };
 
@@ -21,10 +21,10 @@ const ManageBikeTable = ({ bike }: { bike: TBike }) => {
       try {
         await deleteBike(id);
       } catch (error) {
-        console.log("bike could not deleted");
+        console.log("bike could not be deleted");
       }
     } else {
-      console.log("bike deletion cancel");
+      console.log("bike deletion canceled");
     }
   };
 
@@ -67,7 +67,7 @@ const ManageBikeTable = ({ bike }: { bike: TBike }) => {
         <td className="py-4 px-6">
           <NavLink to="">
             <button
-              onClick={() => HandleDelete(bike._id)}
+              onClick={() => HandleDelete(bike._id!)}
               className="bg-[#DE4313] text-white py-2 px-4 rounded-[10px] hover:bg-opacity-90 transition duration-300"
             >
               Delete
@@ -76,8 +76,8 @@ const ManageBikeTable = ({ bike }: { bike: TBike }) => {
         </td>
       </tr>
 
-      {/* Modal */}
-      {isModalOpen && (
+      {/* Render the modal only when selectedBike is not null */}
+      {isModalOpen && selectedBike && (
         <UpdateBikeModal
           bike={selectedBike}
           onClose={() => setIsModalOpen(false)}
