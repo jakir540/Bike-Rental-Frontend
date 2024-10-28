@@ -1,6 +1,8 @@
 import { useGetAllBikesQuery } from "@/redux/features/Bikes/Bikes";
 import { NavLink } from "react-router-dom";
 import { TBike } from "@/types";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const AllBikes = () => {
   const { data, isLoading, isError } = useGetAllBikesQuery(undefined);
@@ -41,6 +43,7 @@ const AllBikes = () => {
                   className="inline-block text-white bg-gradient-to-r from-[#FF6F61] to-[#DE4313] px-6 py-3 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-500 hover:scale-105"
                 >
                   View Details
+                  <FontAwesomeIcon icon={faCircleInfo} className="px-1" />
                 </NavLink>
               </div>
             </div>

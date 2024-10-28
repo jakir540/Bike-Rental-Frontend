@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import UpdateBikeModal from "./UpdateBikeModal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TBike } from "@/types";
 import { useDeleteBikeMutation } from "@/redux/features/Bikes/Bikes";
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ManageBikeTable = ({ bike }: { bike: TBike }) => {
   // Initialize selectedBike as TBike | null
@@ -60,7 +63,7 @@ const ManageBikeTable = ({ bike }: { bike: TBike }) => {
               onClick={() => handleUpdateClick(bike)}
               className="bg-[#DE4313] text-white py-2 px-4 rounded-[10px] hover:bg-opacity-90 transition duration-300"
             >
-              Update
+              <FontAwesomeIcon icon={faPenToSquare} />
             </button>
           </NavLink>
         </td>
@@ -70,7 +73,7 @@ const ManageBikeTable = ({ bike }: { bike: TBike }) => {
               onClick={() => HandleDelete(bike._id!)}
               className="bg-[#DE4313] text-white py-2 px-4 rounded-[10px] hover:bg-opacity-90 transition duration-300"
             >
-              Delete
+              <FontAwesomeIcon icon={faTrash} />
             </button>
           </NavLink>
         </td>

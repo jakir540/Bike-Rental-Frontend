@@ -2,6 +2,8 @@ import Lottie from "react-lottie";
 import animationData from "../../assets/contact.json";
 import emailjs from "@emailjs/browser";
 import { useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const ContactUs = () => {
   const defaultOptions = {
@@ -103,6 +105,7 @@ const ContactUs = () => {
                   className="w-full py-3 px-6 bg-gradient-to-r from-[#DE4313] to-[#FF6F61] text-white rounded-full font-semibold  shadow-lg hover:shadow-2xl transform hover:scale-110 transition-transform duration-300 ease-in-out"
                 >
                   Send Message
+                  <FontAwesomeIcon icon={faPaperPlane} className="px-1" />
                 </button>
               </div>
             </form>

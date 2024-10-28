@@ -2,21 +2,29 @@ import { useForm } from "react-hook-form";
 // import { useNavigate } from "react-router-dom";
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaHome } from "react-icons/fa";
 import { useSignUpMutation } from "@/redux/features/signUp/signUp";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 interface FormData {
   name: string;
   email: string;
   password: string;
   phone: string;
+  role: string;
   address: string;
 }
 
 const SignUp = () => {
+  const router = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormData>();
+  } = useForm<FormData>({
+    defaultValues: {
+      role: "user",
+    },
+  });
 
   // const navigate = useNavigate();
   const [signUp, { isLoading, isError }] = useSignUpMutation();
@@ -27,10 +35,11 @@ const SignUp = () => {
     try {
       const res = await signUp(data).unwrap();
       console.log("login successfully", res);
+      toast.success("Sign up successfully!");
+      router("/login");
     } catch (error) {
       console.log(error);
     }
-    // navigate("/login?success=1");
   };
 
   return (

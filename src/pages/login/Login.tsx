@@ -126,6 +126,16 @@ const Login = () => {
               </button>
             </div>
           </form>
+          <p className="mt-4 text-gray-400 text-center">
+            If you don't have an account,please
+            <a
+              href="/signup"
+              className="capitalize px-1 text-blue-600 text-xl hover:text-blue-800 font-semibold transition-colors duration-200"
+            >
+              sign up
+            </a>
+            .
+          </p>
 
           <div className="text-center text-gray-500">Or sign up with</div>
 

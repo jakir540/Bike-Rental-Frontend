@@ -3,6 +3,8 @@ import bikeVideo from "../../assets/video_bike.mp4";
 import { useGetAllBikesQuery } from "@/redux/features/Bikes/Bikes";
 import { TBike } from "@/types";
 import toast from "react-hot-toast";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Banner = () => {
   const { data } = useGetAllBikesQuery(undefined);
@@ -66,6 +68,7 @@ const Banner = () => {
               className="bg-[#DE4313] text-white px-4 py-2 rounded hover:bg-[#FF6F61] transition duration-300"
             >
               Search
+              <FontAwesomeIcon icon={faMagnifyingGlass} className="px-1" />
             </button>
           </div>
         </form>

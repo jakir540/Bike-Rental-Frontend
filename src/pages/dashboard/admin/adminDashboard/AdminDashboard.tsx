@@ -1,3 +1,12 @@
+import {
+  faAdd,
+  faArrowRotateBack,
+  faHome,
+  faMotorcycle,
+  faUser,
+  faUserTie,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
 
 const AdminDashboard = () => {
@@ -14,7 +23,11 @@ const AdminDashboard = () => {
                   : "flex items-center p-2 rounded-[20px] hover:bg-gray-700 transition-colors"
               }
             >
-              <span className="ml-4">Admin Profile</span>
+              <span className="ml-4">
+                {" "}
+                <FontAwesomeIcon icon={faUserTie} className="px-1" /> Admin
+                Profile
+              </span>
             </NavLink>
           </li>
           <li>
@@ -26,7 +39,10 @@ const AdminDashboard = () => {
                   : "flex items-center p-2 rounded-[20px] hover:bg-gray-700 transition-colors"
               }
             >
-              <span className="ml-4">Bike Management</span>
+              <span className="ml-4">
+                <FontAwesomeIcon icon={faMotorcycle} className="px-1" /> Bike
+                Management
+              </span>
             </NavLink>
           </li>
           <li>
@@ -38,7 +54,9 @@ const AdminDashboard = () => {
                   : "flex items-center p-2 rounded-[20px] hover:bg-gray-700 transition-colors"
               }
             >
-              <span className="ml-4">Add Bike</span>
+              <span className="ml-4">
+                <FontAwesomeIcon icon={faAdd} className="px-1" /> Add Bike
+              </span>
             </NavLink>
           </li>
           <li>
@@ -50,7 +68,10 @@ const AdminDashboard = () => {
                   : "flex items-center p-2 rounded-[20px] hover:bg-gray-700 transition-colors"
               }
             >
-              <span className="ml-4">User Management</span>
+              <span className="ml-4">
+                <FontAwesomeIcon icon={faUser} className="px-1" /> User
+                Management
+              </span>
             </NavLink>
           </li>
           <li>
@@ -62,7 +83,11 @@ const AdminDashboard = () => {
                   : "flex items-center p-2 rounded-[20px] hover:bg-gray-700 transition-colors"
               }
             >
-              <span className="ml-4">Return Bike</span>
+              <span className="ml-4">
+                {" "}
+                <FontAwesomeIcon icon={faArrowRotateBack} className="px-1" />
+                Return Bike
+              </span>
             </NavLink>
           </li>
 
@@ -75,7 +100,11 @@ const AdminDashboard = () => {
                   : "flex items-center p-2 rounded-[20px] hover:bg-gray-700 transition-colors"
               }
             >
-              <span className="ml-4">Home</span>
+              <span className="ml-4">
+                {" "}
+                <FontAwesomeIcon icon={faHome} className="px-1" />
+                Home
+              </span>
             </NavLink>
           </li>
         </ul>

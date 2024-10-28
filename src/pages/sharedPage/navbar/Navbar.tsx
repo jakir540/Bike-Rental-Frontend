@@ -1,5 +1,12 @@
 import { logOut, useCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import {
+  faAddressCard,
+  faBiking,
+  faHome,
+  faTachometerAlt,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
@@ -65,18 +72,21 @@ const Navbar = () => {
             to="/"
             className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
           >
+            <FontAwesomeIcon icon={faHome} className="px-1" />
             Home
           </NavLink>
           <NavLink
             to="/aboutUs"
             className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
           >
+            <FontAwesomeIcon icon={faAddressCard} className="px-1" />
             About Us
           </NavLink>
           <NavLink
             to="/bikes"
             className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
           >
+            <FontAwesomeIcon icon={faBiking} className="px-1" />
             Bikes
           </NavLink>
           {user && (
@@ -85,6 +95,7 @@ const Navbar = () => {
               className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
               onClick={() => setIsOpen(false)}
             >
+              <FontAwesomeIcon icon={faTachometerAlt} className="px-1" />
               Dashboard
             </NavLink>
           )}
