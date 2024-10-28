@@ -22,7 +22,7 @@ const Newsletter = () => {
         transition={{ type: "spring", stiffness: 120, damping: 10 }}
       >
         <motion.img
-          src="https://i.ibb.co.com/60fr6DD/file.png"
+          src="https://i.ibb.co.com/Tw2cgJD/bikesss.png"
           alt="Motorcycle"
           className="w-[700px] lg:w-[900px] mt-[-120px]"
           animate={{

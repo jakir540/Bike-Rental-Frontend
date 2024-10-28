@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ConfirmBookingModal from "@/components/confirmBookingModal/ConfirmBookingModal";
 import { useGetSingleBikeQuery } from "@/redux/features/Bikes/Bikes";
 import { useCreateBikeBookingMutation } from "@/redux/features/bookingBike/bookingBike";
@@ -11,6 +12,8 @@ const BikeDetail = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [createRental] = useCreateBikeBookingMutation();
+  const [backgroundPosition, setBackgroundPosition] = useState("center");
+  const [backgroundSize, setBackgroundSize] = useState("cover"); // Start with normal image size
 
   if (isLoading)
     return (
@@ -26,18 +29,30 @@ const BikeDetail = () => {
     );
 
   const bike = data?.data;
-
-  // Mocking an isLoggedIn status for now, use actual logic in real implementation
   const isLoggedIn = true;
 
-  const handleBookNow = async (startTime: string) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const { left, top, width, height } =
+      e.currentTarget.getBoundingClientRect();
+    const xPos = ((e.pageX - left) / width) * 100;
+    const yPos = ((e.pageY - top) / height) * 100;
+    setBackgroundPosition(`${xPos}% ${yPos}%`);
+    setBackgroundSize("200%");
+  };
+
+  const handleMouseLeave = () => {
+    setBackgroundPosition("center");
+    setBackgroundSize("cover");
+  };
+
+  const handleBookNow = async (startTime: any) => {
     if (!isLoggedIn) {
-      navigate("/login"); // Redirect to login if not logged in
+      navigate("/login");
       return;
     }
 
     try {
-      setIsModalOpen(false); // Close modal before handling the booking
+      setIsModalOpen(false);
 
       const bookingInfo = {
         bikeId: bike._id,
@@ -61,22 +76,27 @@ const BikeDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 p-10">
-      <div className="max-w-6xl mx-auto bg-white p-10 rounded-[8px] shadow-3xl">
-        <div className="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
-          {/* Image Section */}
-          <img
-            src={bike.image}
-            alt={bike.model}
-            className="w-full md:w-1/2 h-96 object-cover rounded-[8px] shadow-xl transform hover:scale-110 transition duration-500"
-          />
+    <div className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-300 lg:p-10">
+      <div className="max-w-5xl mx-auto bg-white bg-opacity-90 backdrop-blur-lg p-10 lg:rounded-2xl shadow-2xl transition-all duration-300 hover:shadow-[rgba(0,_0,_0,_0.4)_0px_30px_90px]">
+        <div className="lg:flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
+          {/* Zoomable Image Section */}
+          <div
+            className="relative w-full md:w-1/2 h-96 overflow-hidden rounded-2xl shadow-xl"
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            style={{
+              backgroundImage: `url(${bike.image})`,
+              backgroundSize: backgroundSize,
+              backgroundPosition: backgroundPosition,
+            }}
+          ></div>
 
           {/* Bike Details Section */}
-          <div className="md:w-1/2">
-            <h2 className="text-4xl font-extrabold text-[#DE4313] mb-6">
+          <div className="md:w-1/2 space-y-4">
+            <h2 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#DE4313] to-[#FF6F61] mb-6">
               {bike.brand} {bike.model}
             </h2>
-            <p className="text-lg text-gray-600 mb-4">
+            <p className="text-lg text-gray-600 leading-relaxed">
               <span className="font-semibold text-xl text-gray-800">
                 Description:{" "}
               </span>
@@ -84,42 +104,43 @@ const BikeDetail = () => {
                 ? bike.description
                 : "This is a high-performance bike, perfect for long rides and city commuting."}
             </p>
-            <p className="text-xl text-gray-700 mb-3">
-              <span className="font-semibold">Price: </span>${" "}
-              {bike.pricePerHour}
-              /hour
-            </p>
-            <p className="text-xl text-gray-700 mb-3">
-              <span className="font-semibold">Year: </span>
-              {bike.year}
-            </p>
-            <p className="text-xl text-gray-700 mb-3">
-              <span className="font-semibold">Engine: </span>
-              {bike.cc}cc
-            </p>
-            <p className="text-xl text-gray-700 mb-5">
-              <span className="font-semibold">Availability: </span>
-              <span
-                className={`${
-                  bike.isAvailable ? "text-green-600" : "text-red-600"
-                } font-bold`}
-              >
-                {bike.isAvailable ? "Available" : "Unavailable"}
-              </span>
-            </p>
+            <div className="text-xl text-gray-700">
+              <p className="mb-3">
+                <span className="font-semibold">Price: </span>$
+                {bike.pricePerHour}/hour
+              </p>
+              <p className="mb-3">
+                <span className="font-semibold">Year: </span>
+                {bike.year}
+              </p>
+              <p className="mb-3">
+                <span className="font-semibold">Engine: </span>
+                {bike.cc}cc
+              </p>
+              <p className="mb-5">
+                <span className="font-semibold">Availability: </span>
+                <span
+                  className={`${
+                    bike.isAvailable ? "text-green-500" : "text-red-500"
+                  } font-bold`}
+                >
+                  {bike.isAvailable ? "Available" : "Unavailable"}
+                </span>
+              </p>
+            </div>
 
             {/* Book Now Button */}
             {bike.isAvailable ? (
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-bold py-3 px-6 rounded-[8px] shadow-lg hover:shadow-2xl transition transform hover:scale-110 duration-300"
+                className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-2xl transition-transform transform hover:scale-110 duration-300"
               >
                 Book Now
               </button>
             ) : (
               <button
                 disabled
-                className="bg-gray-300 text-gray-500 font-bold py-3 px-6 rounded-[8px] shadow-lg transition duration-300 cursor-not-allowed"
+                className="bg-gray-300 text-gray-500 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 cursor-not-allowed"
               >
                 Unavailable
               </button>

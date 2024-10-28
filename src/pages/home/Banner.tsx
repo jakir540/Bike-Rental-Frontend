@@ -35,7 +35,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-[80vh] overflow-hidden">
       <video
         autoPlay
         loop
@@ -45,7 +45,7 @@ const Banner = () => {
         <source src={bikeVideo} type="video/mp4" />
       </video>
 
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white bg-black bg-opacity-50">
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white bg-black bg-opacity-40">
         <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-bounce">
           <span className="text-[#DE4313] text-[90px] animate-pulse">F</span>ind
           Your Perfect{" "}

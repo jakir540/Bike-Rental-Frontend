@@ -14,7 +14,7 @@ const contentStyle: React.CSSProperties = {
 };
 const Testimonial = () => {
   return (
-    <div className="bg-gradient-to-r from-[#1A1A2E] to-[#010313] text-white py-20 ">
+    <div className="bg-gradient-to-r from-[#1A1A2E] to-[#010313] text-white py-10">
       <h2 className="text-5xl text-center font-bold text-white mb-12">
         Testimonials
       </h2>
