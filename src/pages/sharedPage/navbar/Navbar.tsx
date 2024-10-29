@@ -10,9 +10,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
+import { useTheme } from "@/context/ThemeContext";
+
+import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { darkMode, toggleTheme } = useTheme();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -23,19 +28,21 @@ const Navbar = () => {
 
   const handleSignOut = () => {
     dispatch(logOut());
-    //todo
-    // add to redirect login page
     navigate("/login");
   };
 
   return (
-    <nav className="bg-[#1A1A2E] shadow-lg px-5">
+    <nav
+      className={`${
+        darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
+      } shadow-lg px-5`}
+    >
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo */}
         <div>
           <NavLink to="/">
             <img
-              src="https://i.ibb.co.com/4M8WDwD/logo.jpg"
+              src="https://i.ibb.co/4M8WDwD/logo.jpg"
               className="h-12 w-12 rounded-full"
               alt="Logo"
             />
@@ -46,7 +53,7 @@ const Navbar = () => {
         <div className="md:hidden">
           <button
             onClick={toggleMenu}
-            className="text-[#ECECEC] focus:outline-none"
+            className="text-gray-500 focus:outline-none"
             aria-label="Toggle menu"
           >
             <svg
@@ -70,21 +77,21 @@ const Navbar = () => {
         <div className="hidden md:flex space-x-8 items-center">
           <NavLink
             to="/"
-            className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
+            className="hover:text-[#FF6F61] transition-colors duration-300 p-2"
           >
             <FontAwesomeIcon icon={faHome} className="px-1" />
             Home
           </NavLink>
           <NavLink
             to="/aboutUs"
-            className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
+            className="hover:text-[#FF6F61] transition-colors duration-300 p-2"
           >
             <FontAwesomeIcon icon={faAddressCard} className="px-1" />
             About Us
           </NavLink>
           <NavLink
             to="/bikes"
-            className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
+            className="hover:text-[#FF6F61] transition-colors duration-300 p-2"
           >
             <FontAwesomeIcon icon={faBiking} className="px-1" />
             Bikes
@@ -92,7 +99,7 @@ const Navbar = () => {
           {user && (
             <NavLink
               to="/dashboard"
-              className="text-[#ECECEC] hover:text-[#FF6F61] transition-colors duration-300 p-2"
+              className="hover:text-[#FF6F61] transition-colors duration-300 p-2"
               onClick={() => setIsOpen(false)}
             >
               <FontAwesomeIcon icon={faTachometerAlt} className="px-1" />
@@ -116,29 +123,34 @@ const Navbar = () => {
               Sign Out
             </button>
           )}
+
+          {/* Theme Toggle */}
+          <button onClick={toggleTheme} className="ml-4">
+            <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
+          </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-[#1A1A2E] p-4">
+        <div className="md:hidden bg-gray-800 p-4">
           <NavLink
             to="/"
-            className="block text-[#ECECEC] py-2 px-4 hover:text-[#FF6F61] transition-colors duration-300"
+            className="block py-2 px-4 hover:text-[#FF6F61] transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             Home
           </NavLink>
           <NavLink
             to="/aboutUs"
-            className="block text-[#ECECEC] py-2 px-4 hover:text-[#FF6F61] transition-colors duration-300"
+            className="block py-2 px-4 hover:text-[#FF6F61] transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             About Us
           </NavLink>
           <NavLink
             to="/bikes"
-            className="block text-[#ECECEC] py-2 px-4 hover:text-[#FF6F61] transition-colors duration-300"
+            className="block py-2 px-4 hover:text-[#FF6F61] transition-colors duration-300"
             onClick={() => setIsOpen(false)}
           >
             Bikes
