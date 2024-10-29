@@ -7,7 +7,7 @@ const Newsletter = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="relative flex justify-between h-[450px] items-center bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white py-10 px-8">
+    <div className="relative lg:flex justify-between h-[450px] items-center bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white py-10 px-8">
       {/* Bike Image with Framer Motion */}
       <motion.div
         className="left-0"

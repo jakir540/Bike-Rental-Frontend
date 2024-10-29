@@ -91,7 +91,7 @@ const Login = () => {
                 className={`w-full px-10 py-3 border rounded-full shadow-sm ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
-                placeholder="Email Address"
+                placeholder="example@gmail.com"
               />
               {errors.email && (
                 <p className="mt-2 text-sm text-red-600">
@@ -108,7 +108,7 @@ const Login = () => {
                 className={`w-full px-10 py-3 border rounded-full shadow-sm ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
-                placeholder="Password"
+                placeholder="***********"
               />
               {errors.password && (
                 <p className="mt-2 text-sm text-red-600">
