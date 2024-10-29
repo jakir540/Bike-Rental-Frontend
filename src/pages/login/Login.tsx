@@ -6,6 +6,8 @@ import {
   FaGoogle,
   FaGithub,
   FaLock,
+  FaEye,
+  FaEyeSlash,
 } from "react-icons/fa";
 import Lottie from "react-lottie";
 import animationData from "../../assets/Animation login - 1724636559571.json";
@@ -13,6 +15,7 @@ import { useLoginMutation } from "@/redux/features/login/login";
 import { useAppDispatch } from "@/redux/hook";
 import { setUser } from "@/redux/features/auth/authSlice";
 import verifyToken from "@/utils/verifyToken";
+import { useState } from "react";
 
 interface FormData {
   email: string;
@@ -35,9 +38,10 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>();
-
   const navigate = useNavigate();
   const [login, { isError, isLoading }] = useLoginMutation();
+  const [showPassword, setShowPassword] = useState(false);
+
   if (isLoading) {
     return <p>data is loading......</p>;
   }
@@ -45,13 +49,16 @@ const Login = () => {
     return <p>Error data is loading </p>;
   }
 
-  //onsubmit funtion
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
+  // onSubmit function
   const onSubmit = async (data: FormData) => {
     try {
       const res = await login(data).unwrap();
-      console.log(res);
       const user = verifyToken(res.token);
-      console.log(user);
       dispatch(setUser({ user: { email: data.email }, token: res.token }));
     } catch (error) {
       console.log("Login Error:", error);
@@ -65,8 +72,8 @@ const Login = () => {
         Login Here
       </h2>
 
-      <div className="flex items-center justify-around  p-6 py-16">
-        <div className="">
+      <div className="flex items-center justify-around p-6 py-16">
+        <div>
           <Lottie options={defaultOptions} />
         </div>
         <div className="w-full max-w-lg p-8 space-y-6 bg-white rounded-3xl shadow-2xl transform transition-all hover:scale-105">
@@ -91,7 +98,8 @@ const Login = () => {
                 className={`w-full px-10 py-3 border rounded-full shadow-sm ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
-                placeholder="example@gmail.com"
+                // placeholder="test@example.com"
+                defaultValue="test@example.com"
               />
               {errors.email && (
                 <p className="mt-2 text-sm text-red-600">
@@ -99,17 +107,26 @@ const Login = () => {
                 </p>
               )}
             </div>
-            {/* password field  */}
+
+            {/* Password field with visibility toggle */}
             <div className="relative">
               <FaLock className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 {...register("password", { required: "Password is required" })}
                 className={`w-full px-10 py-3 border rounded-full shadow-sm ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
-                placeholder="***********"
+                // placeholder="password123"
+                defaultValue="password123"
               />
+              <button
+                type="button"
+                onClick={togglePasswordVisibility}
+                className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 focus:outline-none"
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
               {errors.password && (
                 <p className="mt-2 text-sm text-red-600">
                   {errors.password.message}
@@ -126,8 +143,9 @@ const Login = () => {
               </button>
             </div>
           </form>
+
           <p className="mt-4 text-gray-400 text-center">
-            If you don't have an account,please
+            If you don't have an account, please
             <a
               href="/signup"
               className="capitalize px-1 text-blue-600 text-xl hover:text-blue-800 font-semibold transition-colors duration-200"
@@ -140,19 +158,16 @@ const Login = () => {
           <div className="text-center text-gray-500">Or sign up with</div>
 
           <div className="flex justify-center space-x-4 mt-4">
-            {/* Facebook Button */}
             <button className="flex items-center px-4 py-2 space-x-2 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out">
               <FaFacebookF className="w-5 h-5" />
               <span>Facebook</span>
             </button>
 
-            {/* Google Button */}
             <button className="flex items-center px-4 py-2 space-x-2 bg-red-500 text-white font-semibold rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 ease-in-out">
               <FaGoogle className="w-5 h-5" />
               <span>Google</span>
             </button>
 
-            {/* GitHub Button */}
             <button className="flex items-center px-4 py-2 space-x-2 bg-gray-800 text-white font-semibold rounded-full shadow-lg hover:bg-gray-900 transition-all duration-300 ease-in-out">
               <FaGithub className="w-5 h-5" />
               <span>GitHub</span>

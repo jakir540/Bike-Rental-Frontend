@@ -19,8 +19,8 @@ const DashboardLayout = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-100">
-      {/* Sidebar */}
-      <aside className="w-64 bg-gray-800 text-white p-6">
+      {/* Sticky Sidebar */}
+      <aside className="w-64 bg-gray-800 text-white p-6 fixed top-0 left-0 h-screen">
         <div className="flex flex-col items-center mb-10">
           <div className="w-24 h-24 rounded-full bg-gray-500 mb-4">
             <img
@@ -36,8 +36,8 @@ const DashboardLayout = () => {
         {userRole === "admin" ? <AdminDashboard /> : <UserDashboard />}
       </aside>
 
-      {/* Main Content Area */}
-      <main className="flex-1">
+      {/* Main Content Area with Margin for Sticky Sidebar */}
+      <main className="flex-1 ml-64">
         <Outlet />
       </main>
     </div>
