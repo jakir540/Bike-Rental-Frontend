@@ -74,10 +74,3 @@ const MyRentals = () => {
 };
 
 export default MyRentals;
-
-// https://i.ibb.co.com/CHB8cqG/bike-1.jpg
-// https://i.ibb.co.com/Fh7p5mX/bike-2.jpg
-// https://i.ibb.co.com/SnzyDVB/bike-3.webp
-// https://i.ibb.co.com/B283xw2/bike-4.jpg
-// https://i.ibb.co.com/Y8CMtD8/bike-5.jpg
-// https://i.ibb.co.com/wcLDCrp/bike-6.jpg
