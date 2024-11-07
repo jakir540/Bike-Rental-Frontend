@@ -14,7 +14,7 @@ const DashboardLayout = () => {
   }, [data, refetch]);
 
   const userProfile = data?.data;
-  const userRole = userProfile?.role; // Assuming the role is part of userProfile
+  const userRole = userProfile?.role;
   console.log(userProfile);
 
   return (

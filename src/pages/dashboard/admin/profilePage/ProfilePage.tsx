@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from "react";
 import { useShowProfileQuery } from "@/redux/features/users/showProfile/showProfileApi";
 import UpdateProfileModal from "./UpdateProfileModal";
@@ -213,7 +214,7 @@ const ProfilePage = () => {
               Bike Rental Statistics
             </h3>
             <div className="mt-4">
-              <Bar data={bikeStatisticsData} options={options} />
+              <Bar data={bikeStatisticsData} />
             </div>
           </div>
         </div>

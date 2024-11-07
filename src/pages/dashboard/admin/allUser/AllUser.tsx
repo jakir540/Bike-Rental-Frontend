@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useDeleteUserMutation,
   useGetAllusersQuery,
@@ -9,24 +9,37 @@ import toast from "react-hot-toast";
 import Loading from "@/components/loadingPage/Loading";
 import { IUser } from "@/types";
 import ErrorPage from "../../ErrorPage/ErrorPage";
+import { useShowProfileQuery } from "@/redux/features/users/showProfile/showProfileApi";
 
 const AllUser = () => {
-  const { data, isLoading, isError, error } = useGetAllusersQuery("");
+  const {
+    data: allUsersData,
+    isLoading: usersLoading,
+    isError: usersError,
+  } = useGetAllusersQuery("");
+  const {
+    data: profileData,
+    isLoading: profileLoading,
+    refetch,
+  } = useShowProfileQuery(undefined);
   const [updateUserRole] = usePromoteUserToAdminMutation();
-
   const [deleteUser] = useDeleteUserMutation();
 
-  // State to manage the user to be deleted
   const [userInfo, setUserInfo] = useState<any>(null);
-  const [isModalOpen, setModalOpen] = useState(false); // Modal state
+  const [isModalOpen, setModalOpen] = useState(false);
 
-  const users = data?.data;
-  console.log(error);
+  const users = allUsersData?.data;
+  const loggedInUser = profileData?.data;
 
-  if (isLoading) return <Loading />;
-  if (isError) return <ErrorPage />;
+  useEffect(() => {
+    if (profileData) {
+      refetch();
+    }
+  }, [profileData, refetch]);
 
-  // Handle user role update
+  if (usersLoading || profileLoading) return <Loading />;
+  if (usersError) return <ErrorPage />;
+
   const handleRoleChange = async (userId: string, role: string) => {
     try {
       await updateUserRole({ id: userId, role });
@@ -37,13 +50,12 @@ const AllUser = () => {
     }
   };
 
-  // Handle user deletion
   const handleDeleteUser = async () => {
     if (userInfo) {
       try {
         await deleteUser(userInfo._id);
         toast.success("User Deleted Successfully");
-        setModalOpen(false); //close modal after delete
+        setModalOpen(false);
       } catch (err) {
         console.error("Failed to delete user:", err);
         toast.error("Failed to delete user");
@@ -52,47 +64,53 @@ const AllUser = () => {
   };
 
   return (
-    <div className="container mx-auto p-6">
-      <h2 className="text-3xl font-semibold mb-6 text-center">All Users</h2>
-      <div className="space-y-8">
+    <div className="container mx-auto p-8 space-y-8">
+      <h2 className="text-4xl font-bold text-center mb-8 text-[#0D3B66]">
+        All Users
+      </h2>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {users?.map((user: IUser, index: number) => (
           <form
             key={user.id}
-            className="p-6 bg-white shadow-md rounded-[8px] border border-gray-200"
+            className="p-6 bg-white shadow-lg rounded-lg border border-gray-100 transform transition hover:shadow-2xl hover:scale-105 duration-300 ease-in-out"
           >
-            <h3 className="text-xl font-bold mb-4">
+            <h3
+              className={`text-2xl font-semibold mb-4 ${
+                user._id === loggedInUser?._id
+                  ? "text-green-600"
+                  : "text-[#0D3B66]"
+              }`}
+            >
               User {index + 1}: {user.name}
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* User Name */}
+            <div className="grid grid-cols-1 gap-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-600">
                   Name
                 </label>
                 <input
                   type="text"
                   value={user.name}
                   readOnly
-                  className="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66]"
                 />
               </div>
 
-              {/* Email */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-600">
                   Email
                 </label>
                 <input
                   type="email"
                   value={user.email}
                   readOnly
-                  className="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66]"
                 />
               </div>
 
-              {/* Role */}
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-600">
                   Role
                 </label>
                 <select
@@ -101,38 +119,21 @@ const AllUser = () => {
                   onChange={(e) =>
                     handleRoleChange(user._id as string, e.target.value)
                   }
-                  className="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+                  className="mt-1 block w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66]"
                 >
                   <option value="admin">Admin</option>
                   <option value="user">User</option>
                 </select>
               </div>
-
-              {/* Status */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Status
-                </label>
-                <input
-                  type="text"
-                  value={user.active ? "Active" : "Inactive"}
-                  readOnly
-                  className={`mt-1 block w-full px-3 py-2 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 ${
-                    user.active
-                      ? "bg-green-100 border-green-300 text-green-800"
-                      : "bg-red-100 border-red-300 text-red-800"
-                  }`}
-                />
-              </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-6 text-center">
               <button
                 type="button"
-                className="inline-flex items-center px-4 py-2 text-white bg-red-600 rounded-[6px] shadow-sm hover:bg-red-500"
+                className="inline-flex items-center px-5 py-3 text-white bg-gradient-to-r from-red-500 to-red-700 rounded-[6px] shadow-md hover:from-red-600 hover:to-red-800 transform transition duration-300 ease-in-out"
                 onClick={() => {
                   setUserInfo(user);
-                  setModalOpen(true); // Open the modal
+                  setModalOpen(true);
                 }}
               >
                 Delete User
@@ -142,26 +143,26 @@ const AllUser = () => {
         ))}
       </div>
 
-      {/* Delete Confirmation Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
-          <div className="bg-white p-6 rounded-[8px] shadow-lg max-w-sm">
-            <h2 className="text-lg font-semibold text-gray-800 mb-4">
-              Are you sure you want to delete this user?
+          <div className="bg-white p-8 rounded-lg shadow-xl transform transition-all duration-300 max-w-sm">
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              Confirm Deletion
             </h2>
-            <p className="text-sm text-gray-600 mb-6">
-              You cannot recover the data once it's deleted.
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to delete this user? This action is
+              irreversible.
             </p>
             <div className="flex justify-end space-x-4">
               <button
                 onClick={() => setModalOpen(false)}
-                className="px-4 py-2 bg-gray-300 rounded-md hover:bg-gray-400"
+                className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transform transition duration-150"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDeleteUser}
-                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
+                className="px-4 py-2 bg-red-600 text-white rounded-[6px] hover:bg-red-700 transform transition duration-150"
               >
                 Confirm
               </button>

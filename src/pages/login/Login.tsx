@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import {
   FaEnvelope,
-  FaFacebookF,
-  FaGoogle,
-  FaGithub,
+  // FaFacebookF,
+  // FaGoogle,
+  // FaGithub,
   FaLock,
   FaEye,
   FaEyeSlash,
@@ -16,6 +17,11 @@ import { useAppDispatch } from "@/redux/hook";
 import { setUser } from "@/redux/features/auth/authSlice";
 import verifyToken from "@/utils/verifyToken";
 import { useState } from "react";
+
+// Firebase imports
+// import { auth, googleProvider } from "../../../src/firebaseConfig";
+// import { signInWithPopup } from "firebase/auth";
+// import toast from "react-hot-toast";
 
 interface FormData {
   email: string;
@@ -54,16 +60,34 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  // // Google Sign-In Handler
+  // const handleGoogleSignIn = async () => {
+  //   try {
+  //     console.log("clicked");
+  //     const result = await signInWithPopup(auth, googleProvider);
+  //     const user = result.user;
+  //     console.log("user", user.email);
+  //     const token = await user.getIdToken();
+  //     console.log("token", token);
+  //     dispatch(setUser({ user: { email: user.email, role: "user" }, token }));
+  //     toast.success("Logged in with Google!");
+  //     navigate("/dashboard");
+  //   } catch (error) {
+  //     console.error("Google Sign-In Error:", error);
+  //     toast.error("Google sign-in failed. Please try again.");
+  //   }
+  // };
+
   // onSubmit function
   const onSubmit = async (data: FormData) => {
     try {
       const res = await login(data).unwrap();
       const user = verifyToken(res.token);
       dispatch(setUser({ user: { email: data.email }, token: res.token }));
+      navigate("/dashboard");
     } catch (error) {
       console.log("Login Error:", error);
     }
-    navigate("/dashboard");
   };
 
   return (
@@ -98,7 +122,6 @@ const Login = () => {
                 className={`w-full px-10 py-3 border rounded-full shadow-sm ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
-                // placeholder="test@example.com"
                 defaultValue="test@example.com"
               />
               {errors.email && (
@@ -117,7 +140,6 @@ const Login = () => {
                 className={`w-full px-10 py-3 border rounded-full shadow-sm ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
-                // placeholder="password123"
                 defaultValue="password123"
               />
               <button
@@ -155,24 +177,29 @@ const Login = () => {
             .
           </p>
 
-          <div className="text-center text-gray-500">Or sign up with</div>
+          {/* <div className="text-center text-gray-500">Or sign up with</div>
 
           <div className="flex justify-center space-x-4 mt-4">
-            <button className="flex items-center px-4 py-2 space-x-2 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out">
-              <FaFacebookF className="w-5 h-5" />
-              <span>Facebook</span>
-            </button>
+            <div className="flex justify-center space-x-4 mt-4">
+              <button className="flex items-center px-4 py-2 space-x-2 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out">
+                <FaFacebookF className="w-5 h-5" />
+                <span>Facebook</span>
+              </button>
 
-            <button className="flex items-center px-4 py-2 space-x-2 bg-red-500 text-white font-semibold rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 ease-in-out">
-              <FaGoogle className="w-5 h-5" />
-              <span>Google</span>
-            </button>
+              <button
+                onClick={handleGoogleSignIn}
+                className="flex items-center px-4 py-2 space-x-2 bg-red-500 text-white font-semibold rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 ease-in-out"
+              >
+                <FaGoogle className="w-5 h-5" />
+                <span>Google</span>
+              </button>
 
-            <button className="flex items-center px-4 py-2 space-x-2 bg-gray-800 text-white font-semibold rounded-full shadow-lg hover:bg-gray-900 transition-all duration-300 ease-in-out">
-              <FaGithub className="w-5 h-5" />
-              <span>GitHub</span>
-            </button>
-          </div>
+              <button className="flex items-center px-4 py-2 space-x-2 bg-gray-800 text-white font-semibold rounded-full shadow-lg hover:bg-gray-900 transition-all duration-300 ease-in-out">
+                <FaGithub className="w-5 h-5" />
+                <span>GitHub</span>
+              </button>
+            </div>
+          </div> */}
         </div>
       </div>
     </div>
