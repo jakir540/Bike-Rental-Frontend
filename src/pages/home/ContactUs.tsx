@@ -16,7 +16,7 @@ const ContactUs = () => {
   };
 
   const form = useRef<HTMLFormElement>(null);
-  // for send message to user
+
   const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -36,19 +36,19 @@ const ContactUs = () => {
         }
       );
   };
+
   return (
-    <div className="bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white py-10">
-      <div className="container mx-auto px-4">
-        <h2 className="text-5xl font-bold text-center mb-8 text-white">
+    <div className="min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white flex items-center justify-center py-20">
+      <div className="container mx-auto px-6 lg:px-12">
+        <h2 className="text-5xl font-bold text-center mb-12 text-white tracking-wider">
           Contact Us
         </h2>
 
-        <div className="flex flex-col lg:flex-row items-center justify-center">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
           {/* Form Section */}
-          <div className="w-full lg:w-1/2 bg-[#1C2833] rounded-xl shadow-lg p-10 lg:mr-8 transition-all duration-300">
-            <form ref={form} onSubmit={sendEmail}>
-              {/* Name Field */}
-              <div className="mb-8">
+          <div className="w-full max-w-lg bg-[#1C2833] rounded-2xl shadow-2xl p-12 transition-all duration-300 transform hover:scale-105">
+            <form ref={form} onSubmit={sendEmail} className="space-y-6">
+              <div>
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium mb-2 text-[#EAECEE] tracking-wide"
@@ -59,13 +59,13 @@ const ContactUs = () => {
                   type="text"
                   name="user_name"
                   id="name"
-                  className="w-full px-5 py-3 border-none rounded-lg shadow-sm bg-[#2E4053] text-white placeholder-gray-400 focus:ring-2 focus:ring-[#FF5733] focus:outline-none transition-all duration-300 ease-in-out"
+                  className="w-full px-5 py-3 rounded-lg bg-[#2E4053] text-white placeholder-gray-400 focus:ring-2 focus:ring-[#FF5733] focus:outline-none transition-all duration-300"
                   placeholder="Enter your name"
+                  required
                 />
               </div>
 
-              {/* Email Field */}
-              <div className="mb-8">
+              <div>
                 <label
                   htmlFor="email"
                   className="block text-sm font-medium mb-2 text-[#EAECEE] tracking-wide"
@@ -76,13 +76,13 @@ const ContactUs = () => {
                   type="email"
                   name="user_email"
                   id="email"
-                  className="w-full px-5 py-3 border-none rounded-lg shadow-sm bg-[#2E4053] text-white placeholder-gray-400 focus:ring-2 focus:ring-[#FF5733] focus:outline-none transition-all duration-300 ease-in-out"
+                  className="w-full px-5 py-3 rounded-lg bg-[#2E4053] text-white placeholder-gray-400 focus:ring-2 focus:ring-[#FF5733] focus:outline-none transition-all duration-300"
                   placeholder="Enter your email"
+                  required
                 />
               </div>
 
-              {/* Message Field */}
-              <div className="mb-8">
+              <div>
                 <label
                   htmlFor="message"
                   className="block text-sm font-medium mb-2 text-[#EAECEE] tracking-wide"
@@ -92,28 +92,25 @@ const ContactUs = () => {
                 <textarea
                   id="message"
                   name="message"
-                  className="w-full h-36 px-5 py-3 border-none rounded-lg shadow-sm bg-[#2E4053] text-white placeholder-gray-400 focus:ring-2 focus:ring-[#FF5733] focus:outline-none transition-all duration-300 ease-in-out"
+                  className="w-full h-40 px-5 py-3 rounded-lg bg-[#2E4053] text-white placeholder-gray-400 focus:ring-2 focus:ring-[#FF5733] focus:outline-none transition-all duration-300"
                   placeholder="Write your message"
+                  required
                 ></textarea>
               </div>
 
-              {/* Submit Button */}
-              <div className="text-center">
-                <button
-                  type="submit"
-                  value="send"
-                  className="w-full py-3 px-6 bg-gradient-to-r from-[#DE4313] to-[#FF6F61] text-white rounded-full font-semibold  shadow-lg hover:shadow-2xl transform hover:scale-110 transition-transform duration-300 ease-in-out"
-                >
-                  Send Message
-                  <FontAwesomeIcon icon={faPaperPlane} className="px-1" />
-                </button>
-              </div>
+              <button
+                type="submit"
+                className="w-full py-3 bg-gradient-to-r from-[#DE4313] to-[#FF6F61] text-white rounded-full font-semibold shadow-lg hover:shadow-2xl transform transition-transform duration-300 hover:scale-110 flex justify-center items-center"
+              >
+                Send Message
+                <FontAwesomeIcon icon={faPaperPlane} className="ml-2" />
+              </button>
             </form>
           </div>
 
           {/* Lottie Animation Section */}
-          <div className="lg:w-1/2 lg:h-[500px] mt-8 lg:mt-0">
-            <Lottie options={defaultOptions} />
+          <div className="lg:w-1/2 lg:h-[500px] mt-10 lg:mt-0 flex justify-center">
+            <Lottie options={defaultOptions} height={500} width={500} />
           </div>
         </div>
       </div>

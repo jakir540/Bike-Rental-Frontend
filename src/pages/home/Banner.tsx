@@ -27,7 +27,7 @@ const Banner = () => {
     });
 
     if (matches.length > 0) {
-      toast.success("Bike is available! in our store 🚴‍♂️");
+      toast.success("Bike is available in our store 🚴‍♂️");
       setFilter({ brand: "" });
     } else {
       toast.error("No bike found! 😞");
@@ -35,7 +35,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="relative w-full h-[80vh] overflow-hidden">
+    <div className="relative w-full h-[80vh] overflow-hidden font-sans">
       <video
         autoPlay
         loop
@@ -45,30 +45,28 @@ const Banner = () => {
         <source src={bikeVideo} type="video/mp4" />
       </video>
 
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white bg-black bg-opacity-40">
-        <h1 className="text-4xl md:text-6xl font-bold mb-4 animate-bounce">
-          <span className="text-[#DE4313] text-[90px] animate-pulse">F</span>ind
-          Your Perfect{" "}
-          <span className="text-[#DE4313] text-[90px] animate-pulse">R</span>
-          ide
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white bg-black bg-opacity-50">
+        <h1 className="text-5xl md:text-7xl font-extrabold mb-6 tracking-wide">
+          <span className="text-[#DE4313] animate-pulse">F</span>ind Your
+          Perfect <span className="text-[#DE4313] animate-pulse">R</span>ide
         </h1>
 
         {/* Search Form */}
-        <form onSubmit={handleSearch} className="lg:w-full max-w-md">
+        <form onSubmit={handleSearch} className="w-full max-w-md mt-4">
           <div className="flex items-center border-b-2 border-[#DE4313] py-2">
             <input
               type="text"
               placeholder="Enter the Bike Brand Name"
               value={filter.brand}
               onChange={(e) => setFilter({ ...filter, brand: e.target.value })}
-              className="bg-transparent border-none text-white placeholder-white focus:outline-none flex-1"
+              className="bg-transparent border-none text-white placeholder-white focus:outline-none flex-1 text-lg"
             />
             <button
               type="submit"
-              className="bg-[#DE4313] text-white px-4 py-2 rounded hover:bg-[#FF6F61] transition duration-300"
+              className="ml-2 flex items-center bg-[#DE4313] text-white px-4 py-2 rounded-full shadow-lg hover:bg-[#FF6F61] transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
             >
+              <FontAwesomeIcon icon={faMagnifyingGlass} className="mr-2" />
               Search
-              <FontAwesomeIcon icon={faMagnifyingGlass} className="px-1" />
             </button>
           </div>
         </form>

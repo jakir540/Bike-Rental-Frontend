@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useShowProfileQuery } from "@/redux/features/users/showProfile/showProfileApi";
 import UpdateProfileModal from "./UpdateProfileModal";
-import { Line, Bar } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -37,7 +37,7 @@ const ProfilePage = () => {
   }, [data, refetch]);
 
   const userProfile = data?.data;
-  const { name, phone, address } = userProfile || {};
+  const { name, phone } = userProfile || {};
 
   const bikeStatisticsData = {
     labels: [
@@ -66,30 +66,30 @@ const ProfilePage = () => {
     ],
   };
 
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-      title: {
-        display: true,
-        text: "Monthly Bike Rentals",
-        font: { size: 18 },
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        ticks: { color: "#FFFFFF" },
-        grid: { color: "#3A3A3A" },
-      },
-      x: {
-        ticks: { color: "#FFFFFF" },
-        grid: { color: "#3A3A3A" },
-      },
-    },
-  };
+  // const options = {
+  //   responsive: true,
+  //   plugins: {
+  //     legend: {
+  //       position: "top",
+  //     },
+  //     title: {
+  //       display: true,
+  //       text: "Monthly Bike Rentals",
+  //       font: { size: 18 },
+  //     },
+  //   },
+  //   scales: {
+  //     y: {
+  //       beginAtZero: true,
+  //       ticks: { color: "#FFFFFF" },
+  //       grid: { color: "#3A3A3A" },
+  //     },
+  //     x: {
+  //       ticks: { color: "#FFFFFF" },
+  //       grid: { color: "#3A3A3A" },
+  //     },
+  //   },
+  // };
 
   const recentRentals = [
     {
