@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { TBike } from "@/types";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 const AllBikes = () => {
   const { data, isLoading, isError } = useGetAllBikesQuery(undefined);
   console.log(data);
@@ -15,19 +14,20 @@ const AllBikes = () => {
 
   return (
     <div className="bg-gradient-to-r from-[#1A1A2E] to-[#010313] py-10">
+      {/* <div className="bg-gradient-to-br from-[#0D0D2B] to-[#1B1B36] py-10"> */}
       <div className="container mx-auto px-6">
         <h2 className="text-5xl font-extrabold text-center text-white mb-14 tracking-wider">
           Latest Bikes
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
-          {bikes.slice(0, 8).map((bike: TBike) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-10">
+          {bikes?.slice(0, 8).map((bike: TBike) => (
             <div
               key={bike.id}
-              className="group bg-gradient-to-r from-[#29293A] to-[#3C3C4D] rounded-[20px] overflow-hidden shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl relative"
+              className="group bg-gradient-to-r from-[#29293A] to-[#3C3C4D] rounded-[20px] overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-[1.05] hover:rotate-1 hover:shadow-2xl relative"
             >
               <div className="relative h-64 overflow-hidden rounded-t-[20px]">
                 <img
-                  src={bike.image}
+                  src={bike?.image}
                   alt={bike.brand}
                   className="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-110"
                 />
