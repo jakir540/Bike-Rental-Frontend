@@ -1,0 +1,36 @@
+/* CSS for fade-in animation with depth and scale effect */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95); /* Start with an offset and slightly smaller */
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out,
+    box-shadow 0.5s ease-in-out;
+  will-change: opacity, transform, box-shadow; /* Optimize for smooth transitions */
+  display: block; /* Ensure it's displayed correctly */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+}
+
+/* Visible state */
+.fade-in-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1); /* Zoom into normal size and rise up */
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15); /* Deeper shadow when visible */
+}
+
+/* Optional: Ensure the body takes full height of the screen */
+body {
+  min-height: 100vh; /* Ensures that the page always takes at least full height of the screen */
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif; /* Use a clean, modern font */
+  background-color: #f7f7f7; /* Light background color */
+}
+
+/* Optional: Smooth page scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+.fade-in-visible:hover {
+  transform: translateY(-10px) scale(1.05); /* Slight lift and zoom on hover */
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}

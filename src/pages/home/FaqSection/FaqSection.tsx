@@ -2,7 +2,7 @@ import { FiChevronDown } from "react-icons/fi";
 
 const FaqSection = () => {
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white py-10">
+    <div className="fade-in min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white py-10">
       {/* Header Section */}
       <div className="text-center mb-20 space-y-8">
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">

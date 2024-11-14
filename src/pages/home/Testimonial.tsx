@@ -7,7 +7,7 @@ import bikeOwner2 from "../../assets/bikeOwner2.jpg";
 
 const Testimonial = () => {
   return (
-    <div className="bg-gradient-to-r from-[#1A1A2E] to-[#010313] text-white py-16">
+    <div className="fade-in bg-gradient-to-r from-[#1A1A2E] to-[#010313] text-white py-16">
       <h2 className="text-5xl text-center font-bold text-white mb-14 tracking-wider">
         Testimonials
       </h2>

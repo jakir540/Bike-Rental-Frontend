@@ -38,7 +38,7 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white flex items-center justify-center py-20">
+    <div className="fade-in min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white flex items-center justify-center py-20">
       <div className="container mx-auto px-6 lg:px-12">
         <h2 className="text-5xl font-bold text-center mb-12 text-white tracking-wider">
           Contact Us

@@ -1,6 +1,6 @@
 const WhyChooseUs = () => {
   return (
-    <section className="relative py-16 bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313]">
+    <section className=" fade-in relative py-16 bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313]">
       {/* animated gradient  */}
       <div className="absolute inset-0 overflow-hidden">J</div>
 
