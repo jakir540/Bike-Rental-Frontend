@@ -1,27 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import {
-  FaEnvelope,
-  // FaFacebookF,
-  // FaGoogle,
-  // FaGithub,
-  FaLock,
-  FaEye,
-  FaEyeSlash,
-} from "react-icons/fa";
+import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import Lottie from "react-lottie";
 import animationData from "../../assets/Animation login - 1724636559571.json";
 import { useLoginMutation } from "@/redux/features/login/login";
 import { useAppDispatch } from "@/redux/hook";
 import { setUser } from "@/redux/features/auth/authSlice";
 import verifyToken from "@/utils/verifyToken";
-import { useState } from "react";
-
-// Firebase imports
-// import { auth, googleProvider } from "../../../src/firebaseConfig";
-// import { signInWithPopup } from "firebase/auth";
-// import toast from "react-hot-toast";
 
 interface FormData {
   email: string;
@@ -37,53 +24,47 @@ const defaultOptions = {
   },
 };
 
+// Predefined credentials
+const defaultCredentials = [
+  { email: "user1@example.com", password: "password123" },
+  { email: "johnn@example.com", password: "password123" },
+];
+
 const Login = () => {
   const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>();
   const navigate = useNavigate();
-  const [login, { isError, isLoading }] = useLoginMutation();
+  const [login] = useLoginMutation();
   const [showPassword, setShowPassword] = useState(false);
 
-  if (isLoading) {
-    return <p>data is loading......</p>;
-  }
-  if (isError) {
-    return <p>Error data is loading </p>;
-  }
+  // Track selected credentials
+  const [selectedCredentials, setSelectedCredentials] = useState(0);
+
+  // Set initial form values
+  useEffect(() => {
+    reset(defaultCredentials[0]);
+  }, [reset]);
+
+  const cycleCredentials = () => {
+    const nextIndex = (selectedCredentials + 1) % defaultCredentials.length;
+    setSelectedCredentials(nextIndex);
+    reset(defaultCredentials[nextIndex]); // Reset the form values with new credentials
+  };
 
   // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  // // Google Sign-In Handler
-  // const handleGoogleSignIn = async () => {
-  //   try {
-  //     console.log("clicked");
-  //     const result = await signInWithPopup(auth, googleProvider);
-  //     const user = result.user;
-  //     console.log("user", user.email);
-  //     const token = await user.getIdToken();
-  //     console.log("token", token);
-  //     dispatch(setUser({ user: { email: user.email, role: "user" }, token }));
-  //     toast.success("Logged in with Google!");
-  //     navigate("/dashboard");
-  //   } catch (error) {
-  //     console.error("Google Sign-In Error:", error);
-  //     toast.error("Google sign-in failed. Please try again.");
-  //   }
-  // };
-
-  // onSubmit function
   const onSubmit = async (data: FormData) => {
     try {
       const res = await login(data).unwrap();
       const user = verifyToken(res.token);
-      console.log(user);
       dispatch(setUser({ user: { email: data.email }, token: res.token }));
       navigate("/dashboard");
     } catch (error) {
@@ -109,6 +90,7 @@ const Login = () => {
             Join us and enjoy our services
           </p>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+            {/* Email Field */}
             <div className="relative">
               <FaEnvelope className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
               <input
@@ -123,7 +105,6 @@ const Login = () => {
                 className={`w-full px-10 py-3 border rounded-full shadow-sm ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
-                defaultValue="test@example.com"
               />
               {errors.email && (
                 <p className="mt-2 text-sm text-red-600">
@@ -132,7 +113,7 @@ const Login = () => {
               )}
             </div>
 
-            {/* Password field with visibility toggle */}
+            {/* Password Field */}
             <div className="relative">
               <FaLock className="absolute top-1/2 left-3 transform -translate-y-1/2 text-gray-400" />
               <input
@@ -141,7 +122,6 @@ const Login = () => {
                 className={`w-full px-10 py-3 border rounded-full shadow-sm ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 } focus:ring-2 focus:ring-indigo-400 focus:border-transparent`}
-                defaultValue="password123"
               />
               <button
                 type="button"
@@ -157,6 +137,16 @@ const Login = () => {
               )}
             </div>
 
+            {/* Cycle through credentials */}
+            <button
+              type="button"
+              onClick={cycleCredentials}
+              className="text-blue-500 hover:underline text-center block w-full mt-2"
+            >
+              Use another set of credentials
+            </button>
+
+            {/* Submit Button */}
             <div>
               <button
                 type="submit"
@@ -177,30 +167,6 @@ const Login = () => {
             </a>
             .
           </p>
-
-          {/* <div className="text-center text-gray-500">Or sign up with</div>
-
-          <div className="flex justify-center space-x-4 mt-4">
-            <div className="flex justify-center space-x-4 mt-4">
-              <button className="flex items-center px-4 py-2 space-x-2 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 ease-in-out">
-                <FaFacebookF className="w-5 h-5" />
-                <span>Facebook</span>
-              </button>
-
-              <button
-                onClick={handleGoogleSignIn}
-                className="flex items-center px-4 py-2 space-x-2 bg-red-500 text-white font-semibold rounded-full shadow-lg hover:bg-red-600 transition-all duration-300 ease-in-out"
-              >
-                <FaGoogle className="w-5 h-5" />
-                <span>Google</span>
-              </button>
-
-              <button className="flex items-center px-4 py-2 space-x-2 bg-gray-800 text-white font-semibold rounded-full shadow-lg hover:bg-gray-900 transition-all duration-300 ease-in-out">
-                <FaGithub className="w-5 h-5" />
-                <span>GitHub</span>
-              </button>
-            </div>
-          </div> */}
         </div>
       </div>
     </div>
