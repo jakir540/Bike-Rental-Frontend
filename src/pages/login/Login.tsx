@@ -65,6 +65,7 @@ const Login = () => {
     try {
       const res = await login(data).unwrap();
       const user = verifyToken(res.token);
+      console.log(user);
       dispatch(setUser({ user: { email: data.email }, token: res.token }));
       navigate("/dashboard");
     } catch (error) {

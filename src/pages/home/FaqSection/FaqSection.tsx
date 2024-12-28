@@ -5,10 +5,10 @@ const FaqSection = () => {
     <div className="fade-in min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] text-white py-10">
       {/* Header Section */}
       <div className="text-center mb-20 space-y-8">
-        <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight">
+        <h1 className="text-5xl md:text-5xl font-bold tracking-tight">
           How can we assist you?
         </h1>
-        <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto">
+        <p className="text-xl md:text-xl text-gray-200 max-w-2xl mx-auto">
           Find answers to common questions or get support from our team.
         </p>
 
