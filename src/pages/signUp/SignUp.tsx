@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from "react-hook-form";
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaHome } from "react-icons/fa";
 import { useSignUpMutation } from "@/redux/features/signUp/signUp";
@@ -47,16 +48,18 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] shadow-lg">
-      <h2 className="py-8 text-5xl font-bold text-center text-white">SignUp</h2>
-      <div className="flex items-center justify-around px-6 py-16">
+    <div className="min-h-screen shadow-lg bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313] py-10">
+      <h2 className="py-8 text-5xl font-bold text-center text-white">
+        Sign Up
+      </h2>
+      <div className="flex items-center justify-around p-6 py-16">
         {/* Animation Section */}
-        <div>
+        <div className="w-full max-w-md">
           <Lottie options={defaultOptions} />
         </div>
 
         {/* Form Section */}
-        <div className="w-full max-w-lg p-10 bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl transform transition-all hover:scale-105">
+        <div className="w-full max-w-lg p-10 space-y-6 bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl transform transition-all hover:scale-105">
           <h3 className="text-3xl font-extrabold text-center text-gray-50 mb-6">
             Create an Account
           </h3>
@@ -66,17 +69,15 @@ const SignUp = () => {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
             {/* Name Field */}
             <div className="relative">
+              <FaUser className="absolute top-3 left-4 text-gray-400 text-xl" />
               <input
                 type="text"
                 {...register("name", { required: "Name is required" })}
-                className={`w-full px-4 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
+                className={`w-full px-12 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
                   errors.name ? "border-red-500" : "border-gray-300"
                 }`}
-                placeholder=" "
+                placeholder="Full Name"
               />
-              <label className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none transition-all duration-300 ease-in-out peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500">
-                Full Name
-              </label>
               {errors.name && (
                 <p className="mt-2 text-sm text-red-400">
                   {errors.name.message}
@@ -86,6 +87,7 @@ const SignUp = () => {
 
             {/* Email Field */}
             <div className="relative">
+              <FaEnvelope className="absolute top-3 left-4 text-gray-400 text-xl" />
               <input
                 type="email"
                 {...register("email", {
@@ -95,14 +97,11 @@ const SignUp = () => {
                     message: "Email is invalid",
                   },
                 })}
-                className={`w-full px-4 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
+                className={`w-full px-12 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
                   errors.email ? "border-red-500" : "border-gray-300"
                 }`}
-                placeholder=" "
+                placeholder="Email Address"
               />
-              <label className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none transition-all duration-300 ease-in-out peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500">
-                Email Address
-              </label>
               {errors.email && (
                 <p className="mt-2 text-sm text-red-400">
                   {errors.email.message}
@@ -112,6 +111,7 @@ const SignUp = () => {
 
             {/* Password Field */}
             <div className="relative">
+              <FaLock className="absolute top-3 left-4 text-gray-400 text-xl" />
               <input
                 type="password"
                 {...register("password", {
@@ -121,14 +121,11 @@ const SignUp = () => {
                     message: "Password must be at least 6 characters",
                   },
                 })}
-                className={`w-full px-4 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
+                className={`w-full px-12 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 }`}
-                placeholder=" "
+                placeholder="Password"
               />
-              <label className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none transition-all duration-300 ease-in-out peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500">
-                Password
-              </label>
               {errors.password && (
                 <p className="mt-2 text-sm text-red-400">
                   {errors.password.message}
@@ -138,6 +135,7 @@ const SignUp = () => {
 
             {/* Phone Field */}
             <div className="relative">
+              <FaPhone className="absolute top-3 left-4 text-gray-400 text-xl" />
               <input
                 type="text"
                 {...register("phone", {
@@ -147,14 +145,11 @@ const SignUp = () => {
                     message: "Phone number is invalid",
                   },
                 })}
-                className={`w-full px-4 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
+                className={`w-full px-12 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
                   errors.phone ? "border-red-500" : "border-gray-300"
                 }`}
-                placeholder=" "
+                placeholder="Phone Number"
               />
-              <label className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none transition-all duration-300 ease-in-out peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500">
-                Phone Number
-              </label>
               {errors.phone && (
                 <p className="mt-2 text-sm text-red-400">
                   {errors.phone.message}
@@ -164,17 +159,15 @@ const SignUp = () => {
 
             {/* Address Field */}
             <div className="relative">
+              <FaHome className="absolute top-3 left-4 text-gray-400 text-xl" />
               <input
                 type="text"
                 {...register("address", { required: "Address is required" })}
-                className={`w-full px-4 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
+                className={`w-full px-12 py-3 bg-transparent border-2 rounded-xl text-gray-200 placeholder-gray-500 focus:ring-4 focus:ring-[#FF6F61] outline-none ${
                   errors.address ? "border-red-500" : "border-gray-300"
                 }`}
-                placeholder=" "
+                placeholder="Home Address"
               />
-              <label className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none transition-all duration-300 ease-in-out peer-placeholder-shown:top-4 peer-placeholder-shown:text-gray-500">
-                Home Address
-              </label>
               {errors.address && (
                 <p className="mt-2 text-sm text-red-400">
                   {errors.address.message}

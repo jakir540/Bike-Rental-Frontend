@@ -83,7 +83,7 @@ const Login = () => {
         <div>
           <Lottie options={defaultOptions} />
         </div>
-        <div className="w-full max-w-lg p-8 space-y-6 bg-white rounded-3xl shadow-2xl transform transition-all hover:scale-105">
+        <div className="w-full max-w-lg p-10 space-y-6 bg-white rounded-3xl shadow-2xl transform transition-all hover:scale-105">
           <h2 className="text-3xl font-bold text-center text-gray-700">
             Create an Account
           </h2>
