@@ -18,10 +18,10 @@ const AllBikes = () => {
   const bikes = data?.data || [];
 
   const showMoreBikes = () => {
-    if (showBikes + 3 >= bikes.length) {
+    if (showBikes + 4 >= bikes.length) {
       setShowBikes(bikes.length);
     } else {
-      setShowBikes(showBikes + 3);
+      setShowBikes(showBikes + 4);
     }
   };
 
