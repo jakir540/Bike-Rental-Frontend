@@ -26,7 +26,7 @@ const defaultOptions = {
 
 // Predefined credentials
 const defaultCredentials = [
-  { email: "user1@example.com", password: "password123" },
+  { email: "test@example.com", password: "password123" },
   { email: "johnn@example.com", password: "password123" },
 ];
 
