@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { logOut, useCurrentUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
 import {
@@ -7,15 +8,14 @@ import {
   faTachometerAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import { useTheme } from "@/context/ThemeContext";
-
 import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const navigate = useNavigate();
   const { darkMode, toggleTheme } = useTheme();
 
@@ -31,11 +31,33 @@ const Navbar = () => {
     navigate("/login");
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <nav
       className={`${
-        darkMode ? "bg-gray-900 text-white" : "bg-white text-black"
-      } shadow-lg px-5`}
+        darkMode ? "text-white" : "text-black"
+      } sticky top-0 z-50 shadow-lg px-5 transition-colors duration-300 ${
+        scrolled
+          ? "bg-opacity-20 backdrop-blur-lg " +
+            (darkMode ? "bg-gray-900" : "bg-white")
+          : darkMode
+          ? "bg-gray-900"
+          : "bg-white"
+      }`}
     >
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo */}
