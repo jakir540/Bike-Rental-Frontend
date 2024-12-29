@@ -1,10 +1,15 @@
+import { useState } from "react";
 import { useGetAllBikesQuery } from "@/redux/features/Bikes/Bikes";
 import { NavLink } from "react-router-dom";
 import { TBike } from "@/types";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const AllBikes = () => {
   const { data, isLoading, isError } = useGetAllBikesQuery(undefined);
+
+  const [showBikes, setShowBikes] = useState(6);
+
   console.log(data);
 
   if (isLoading) return <div>Loading...</div>;
@@ -12,15 +17,22 @@ const AllBikes = () => {
 
   const bikes = data?.data || [];
 
+  const showMoreBikes = () => {
+    if (showBikes + 3 >= bikes.length) {
+      setShowBikes(bikes.length);
+    } else {
+      setShowBikes(showBikes + 3);
+    }
+  };
+
   return (
     <div className="bg-gradient-to-r from-[#1A1A2E] to-[#010313] py-10">
-      {/* <div className="bg-gradient-to-br from-[#0D0D2B] to-[#1B1B36] py-10"> */}
       <div className="container mx-auto px-6">
         <h2 className="text-5xl font-extrabold text-center text-white mb-14 tracking-wider">
           Latest Bikes
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3  gap-10">
-          {bikes?.slice(0, 8).map((bike: TBike) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          {bikes?.slice(0, showBikes).map((bike: TBike) => (
             <div
               key={bike.id}
               className="group bg-gradient-to-r from-[#29293A] to-[#3C3C4D] rounded-[20px] overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-[1.05] hover:rotate-1 hover:shadow-2xl relative"
@@ -57,6 +69,16 @@ const AllBikes = () => {
             </div>
           ))}
         </div>
+        {showBikes < bikes.length && (
+          <div className="text-center mt-10">
+            <button
+              onClick={showMoreBikes}
+              className="inline-block text-white bg-gradient-to-r from-[#FF6F61] to-[#FF3F34] px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:shadow-2xl transform transition-all duration-500 hover:scale-105"
+            >
+              Show More
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
