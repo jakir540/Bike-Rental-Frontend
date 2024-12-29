@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const AllBikes = () => {
   const { data, isLoading, isError } = useGetAllBikesQuery(undefined);
 
-  const [showBikes, setShowBikes] = useState(6);
+  const [showBikes, setShowBikes] = useState(8);
 
   console.log(data);
 
@@ -31,7 +31,7 @@ const AllBikes = () => {
         <h2 className="text-5xl font-extrabold text-center text-white mb-14 tracking-wider">
           Latest Bikes
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {bikes?.slice(0, showBikes).map((bike: TBike) => (
             <div
               key={bike.id}
