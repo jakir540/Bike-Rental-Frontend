@@ -1,4 +1,5 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaChartPie } from "react-icons/fa";
 import { useState } from "react";
 import { useShowProfileQuery } from "@/redux/features/users/showProfile/showProfileApi";
@@ -9,12 +10,13 @@ const DashboardNavbar = () => {
   const { data } = useShowProfileQuery(undefined);
   const dispatch = useAppDispatch();
   const userProfile = data?.data;
+  const navigate = useNavigate();
 
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
     dispatch(logOut());
-    Navigate("/login");
+    navigate("/login");
   };
 
   return (
