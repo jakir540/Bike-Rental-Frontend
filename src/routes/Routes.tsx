@@ -16,6 +16,8 @@ import BikeListing from "@/pages/dashboard/user/bikeListing/BikeListing";
 import MyRentals from "@/pages/dashboard/user/myRental/MyRentals";
 import ReturnBike from "@/pages/dashboard/admin/adminDashboard/returnBike/ReturnBike";
 import ErrorPage from "@/pages/dashboard/ErrorPage/ErrorPage";
+import AllRentals from "@/pages/dashboard/admin/adminDashboard/payments/Payments";
+import Payments from "@/pages/dashboard/admin/adminDashboard/payments/Payments";
 
 const router = createBrowserRouter([
   {
@@ -84,6 +86,10 @@ const router = createBrowserRouter([
       {
         path: "rentals",
         element: <MyRentals />,
+      },
+      {
+        path: "allRentals",
+        element: <Payments />,
       },
     ],
   },

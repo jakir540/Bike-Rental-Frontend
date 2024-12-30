@@ -93,7 +93,7 @@ const AdminDashboard = () => {
 
           <li>
             <NavLink
-              to="/"
+              to="/dashboard/allRentals"
               className={({ isActive }) =>
                 isActive
                   ? "text-[#DE4313] flex items-center p-2 rounded-[20px] bg-gray-700"
@@ -103,7 +103,7 @@ const AdminDashboard = () => {
               <span className="ml-4">
                 {" "}
                 <FontAwesomeIcon icon={faHome} className="px-1" />
-                Home
+                Payment
               </span>
             </NavLink>
           </li>
