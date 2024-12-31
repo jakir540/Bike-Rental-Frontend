@@ -39,6 +39,7 @@ const SignUp = () => {
   const onSubmit = async (data: FormData) => {
     try {
       const response = await signUp(data).unwrap();
+      console.log(response);
       toast.success("Sign up successfully!");
       navigate("/login");
     } catch (error) {
