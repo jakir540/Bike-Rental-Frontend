@@ -69,78 +69,53 @@ const AllUser = () => {
         All Users
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {users?.map((user: IUser, index: number) => (
-          <form
-            key={user.id}
-            className="p-6 bg-white shadow-lg rounded-lg border border-gray-100 transform transition hover:shadow-2xl hover:scale-105 duration-300 ease-in-out"
-          >
-            <h3
-              className={`text-2xl font-semibold mb-4 ${
-                user._id === loggedInUser?._id
-                  ? "text-green-600"
-                  : "text-[#0D3B66]"
-              }`}
-            >
-              User {index + 1}: {user.name}
-            </h3>
-            <div className="grid grid-cols-1 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-600">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  value={user.name}
-                  readOnly
-                  className="mt-1 block w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-600">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={user.email}
-                  readOnly
-                  className="mt-1 block w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-600">
-                  Role
-                </label>
-                <select
-                  name="role"
-                  value={user.role}
-                  onChange={(e) =>
-                    handleRoleChange(user._id as string, e.target.value)
-                  }
-                  className="mt-1 block w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66]"
-                >
-                  <option value="admin">Admin</option>
-                  <option value="user">User</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="mt-6 text-center">
-              <button
-                type="button"
-                className="inline-flex items-center px-5 py-3 text-white bg-gradient-to-r from-red-500 to-red-700 rounded-[6px] shadow-md hover:from-red-600 hover:to-red-800 transform transition duration-300 ease-in-out"
-                onClick={() => {
-                  setUserInfo(user);
-                  setModalOpen(true);
-                }}
+      <div className="overflow-x-auto bg-white rounded-lg shadow-lg">
+        <table className="min-w-full table-auto text-sm text-gray-700">
+          <thead className="bg-gradient-to-r from-[#FF6F61] to-[#DE4313] text-white">
+            <tr>
+              <th className="px-6 py-4 text-left font-semibold">User Name</th>
+              <th className="px-6 py-4 text-left font-semibold">Email</th>
+              <th className="px-6 py-4 text-left font-semibold">Role</th>
+              <th className="px-6 py-4 text-left font-semibold">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-200">
+            {users?.map((user: IUser, index: number) => (
+              <tr
+                key={user.id}
+                className={`hover:bg-gray-50 ${
+                  index % 2 === 0 ? "bg-white" : "bg-gray-50"
+                }`}
               >
-                Delete User
-              </button>
-            </div>
-          </form>
-        ))}
+                <td className="px-6 py-4">{user.name}</td>
+                <td className="px-6 py-4">{user.email}</td>
+                <td className="px-6 py-4">
+                  <select
+                    value={user.role}
+                    onChange={(e) =>
+                      handleRoleChange(user._id as string, e.target.value)
+                    }
+                    className="px-4 py-2 bg-gray-100 border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#0D3B66]"
+                  >
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
+                  </select>
+                </td>
+                <td className="px-6 py-4 text-center">
+                  <button
+                    onClick={() => {
+                      setUserInfo(user);
+                      setModalOpen(true);
+                    }}
+                    className="px-5 py-2 bg-gradient-to-r from-red-500 to-red-700 text-white rounded-[6px] shadow-md hover:from-red-600 hover:to-red-800 transition duration-300"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       {isModalOpen && (
