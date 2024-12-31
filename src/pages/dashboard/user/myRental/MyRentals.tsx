@@ -10,6 +10,7 @@ const MyRentals = () => {
   const [deleteBooking, { isLoading: isDeleting }] = useDeleteBookingMutation();
   const myRentals = bookingsData?.data;
 
+  //cancel booking
   const handleCancelRental = async (rentalId: string | undefined) => {
     if (!rentalId) {
       console.error("Rental ID is undefined");
@@ -67,9 +68,7 @@ const MyRentals = () => {
                     {rental.returnTime ? (
                       new Date(rental.returnTime).toLocaleString()
                     ) : (
-                      <span className="italic text-gray-500">
-                        Not Returned Yet
-                      </span>
+                      <span className="italic text-gray-500">Not Returned</span>
                     )}
                   </td>
                   <td className="px-8 py-6 text-green-600 font-semibold">

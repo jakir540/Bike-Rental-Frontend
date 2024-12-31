@@ -8,35 +8,35 @@ const bookingBikeApi = baseApi.injectEndpoints({
         method: "POST",
         body: bookingInfo,
       }),
-      invalidatesTags: ["rental"], // Invalidate rental data on creation
+      invalidatesTags: ["rental"],
     }),
     getMyBooking: builder.query({
       query: () => ({
         url: "/rentals",
         method: "GET",
       }),
-      providesTags: ["rental"], // Provide rental data tag
+      providesTags: ["rental"],
     }),
     getAllBookings: builder.query({
       query: () => ({
         url: "/rentals/allRentals",
         method: "GET",
       }),
-      providesTags: ["rental"], // Provide rental data tag
+      providesTags: ["rental"],
     }),
     returnBike: builder.mutation({
       query: (id) => ({
         url: `rentals/${id}/return`,
         method: "PUT",
       }),
-      invalidatesTags: ["rental"], // Invalidate rental data on return
+      invalidatesTags: ["rental"],
     }),
     deleteBooking: builder.mutation({
       query: (id) => ({
         url: `rentals/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["rental"], // Invalidate rental data on deletion
+      invalidatesTags: ["rental"],
     }),
   }),
 });

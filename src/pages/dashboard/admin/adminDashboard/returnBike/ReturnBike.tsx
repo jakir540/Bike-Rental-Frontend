@@ -1,5 +1,6 @@
 import Loading from "@/components/loadingPage/Loading";
 import {
+  useDeleteBookingMutation,
   useGetAllBookingsQuery,
   useReturnBikeMutation,
 } from "@/redux/features/bookingBike/bookingBike";
@@ -11,15 +12,31 @@ const ReturnBike = () => {
   const { data, isLoading } = useGetAllBookingsQuery(undefined);
   const [returnBike, { isLoading: returnBikeLoading }] =
     useReturnBikeMutation();
+  const [deleteBooking, { isLoading: isDeleting }] = useDeleteBookingMutation();
 
-  const allRentals = data?.data || [];
+  // Cancel Booking Handler
+  const handleCancelRental = async (rentalId: string | undefined) => {
+    if (!rentalId) {
+      console.error("Rental ID is undefined");
+      return;
+    }
 
+    try {
+      await deleteBooking(rentalId).unwrap();
+      toast.success(`Rental with ID ${rentalId} canceled successfully.`);
+    } catch (error) {
+      console.error("Failed to cancel rental:", error);
+      toast.error("Failed to cancel the rental.");
+    }
+  };
+
+  // Return Bike Handler
   const handleReturn = async (rentalId: string) => {
     try {
       await returnBike(rentalId).unwrap();
       toast.success("Bike returned successfully!");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast.error("Failed to return the bike.");
     }
   };
@@ -35,16 +52,18 @@ const ReturnBike = () => {
     return new Date(dateString).toLocaleString(undefined, options);
   };
 
-  if (isLoading || returnBikeLoading) {
+  if (isLoading || returnBikeLoading || isDeleting) {
     return <Loading />;
   }
+
+  const allRentals = data?.data || [];
 
   return (
     <div className="p-8 bg-gray-100 min-h-screen">
       {/* Header */}
       <div className="flex items-center mb-6 gap-3 text-orange-600 text-3xl font-semibold">
         <CornerUpLeft className="w-8 h-8" />
-        <h2 className="tracking-wide">Return Bikes</h2>
+        <h2 className="tracking-wide">Manage Rentals</h2>
       </div>
 
       {/* Table */}
@@ -56,6 +75,7 @@ const ReturnBike = () => {
               <th className="py-4 px-6 text-left">Start Time</th>
               <th className="py-4 px-6 text-left">Return Time</th>
               <th className="py-4 px-6 text-center">Status</th>
+              <th className="py-4 px-6 text-center">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -85,12 +105,21 @@ const ReturnBike = () => {
                       </button>
                     )}
                   </td>
+                  <td className="py-4 px-6 text-center">
+                    <button
+                      onClick={() => handleCancelRental(rental._id as string)}
+                      disabled={isDeleting}
+                      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded transition-transform transform hover:scale-105"
+                    >
+                      Cancel
+                    </button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
                 <td
-                  colSpan={4}
+                  colSpan={5}
                   className="py-8 text-center text-xl font-semibold text-orange-600"
                 >
                   No rentals available at the moment.
