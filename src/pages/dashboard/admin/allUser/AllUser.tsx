@@ -28,8 +28,12 @@ const AllUser = () => {
   const [userInfo, setUserInfo] = useState<any>(null);
   const [isModalOpen, setModalOpen] = useState(false);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5); // Number of users to display per page
+
   const users = allUsersData?.data;
   const loggedInUser = profileData?.data;
+  console.log(loggedInUser);
 
   useEffect(() => {
     if (profileData) {
@@ -63,6 +67,19 @@ const AllUser = () => {
     }
   };
 
+  // Calculate the current page's users
+  const indexOfLastUser = currentPage * itemsPerPage;
+  const indexOfFirstUser = indexOfLastUser - itemsPerPage;
+  const currentUsers = users?.slice(indexOfFirstUser, indexOfLastUser);
+
+  // Handle page change
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Total pages calculation
+  const totalPages = Math.ceil((users?.length || 0) / itemsPerPage);
+
   return (
     <div className="container mx-auto p-8 space-y-8">
       <h2 className="text-4xl font-bold text-center mb-8 text-[#0D3B66]">
@@ -80,7 +97,7 @@ const AllUser = () => {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-200">
-            {users?.map((user: IUser, index: number) => (
+            {currentUsers?.map((user: IUser, index: number) => (
               <tr
                 key={user.id}
                 className={`hover:bg-gray-50 ${
@@ -116,6 +133,39 @@ const AllUser = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-center space-x-4 mt-6">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          className="px-4 py-2 bg-gray-300 text-gray-700 rounded-[6px] hover:bg-gray-400 transform transition duration-150"
+        >
+          Previous
+        </button>
+
+        {[...Array(totalPages)].map((_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={`px-4 py-2 rounded-[6px] transition duration-300 ${
+              currentPage === index + 1
+                ? "bg-gradient-to-r from-red-500 to-red-700 text-white"
+                : "bg-gray-200 text-[#FF6F61] hover:bg-gray-300"
+            }`}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button
+          onClick={() => handlePageChange(currentPage + 1)}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 bg-gray-300 text-gray-700 rounded-[6px] hover:bg-gray-400 transform transition duration-150"
+        >
+          Next
+        </button>
       </div>
 
       {isModalOpen && (
