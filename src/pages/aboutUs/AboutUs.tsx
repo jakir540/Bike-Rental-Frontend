@@ -9,21 +9,26 @@ const AboutUs = () => {
     <div className="text-white min-h-screen bg-[#010313]">
       <section className="container mx-auto px-4 py-8">
         {/* Header Section */}
-        <div className="text-center mb-16 relative">
-          <h1 className="text-5xl font-extrabold mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-[#DE4313] to-pink-500">
+        <div
+          className="relative text-center mb-16 px-6 md:px-12 py-16 bg-cover bg-center"
+          style={{ backgroundImage: `url(${aboutUs})` }} // Add the path to your background image here
+        >
+          <div className="absolute inset-0 bg-black opacity-50 rounded-2xl"></div>{" "}
+          {/* Semi-transparent overlay */}
+          <h1 className="relative text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#DE4313] to-[#FF65A1] tracking-wide mb-8">
             About Us
           </h1>
-          <div className="relative group overflow-hidden rounded-[8px] shadow-lg mb-8 object-cover w-full flex justify-center">
+          <div className="relative group overflow-hidden rounded-2xl shadow-xl mb-8 w-full max-w-3xl mx-auto">
             <img
-              className="rounded transform group-hover:scale-110 transition-transform duration-500"
-              src={aboutUs}
-              alt=""
+              className="rounded-2xl transform group-hover:scale-105 transition-transform duration-700"
+              src={aboutUs} // Add the path to your image
+              alt="About Us"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-500"></div>
+            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
           </div>
-          <p className="text-lg text-gray-300 leading-relaxed max-w-2xl mx-auto">
-            Learn more about our organization, our mission, our team, and our
-            journey.
+          <p className="relative text-lg text-gray-200 leading-relaxed max-w-3xl mx-auto tracking-wide">
+            Explore our organization, understand our mission, meet our team, and
+            learn about our exciting journey.
           </p>
         </div>
 
