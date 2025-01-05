@@ -2,7 +2,7 @@ const WhyChooseUs = () => {
   return (
     <section className=" fade-in relative py-16 bg-gradient-to-r from-[#FF6F61] via-[#1A1A2E] to-[#010313]">
       {/* animated gradient  */}
-      <div className="absolute inset-0 overflow-hidden">J</div>
+      {/* <div className="absolute inset-0 overflow-hidden">J</div> */}
 
       <div className="relative container mx-auto px-6 text-center z-10">
         <h2 className="text-5xl font-bold text-white mb-12">Why Choose Us</h2>

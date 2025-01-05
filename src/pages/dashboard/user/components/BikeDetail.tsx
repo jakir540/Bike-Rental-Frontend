@@ -1,11 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import ConfirmBookingModal from "@/components/confirmBookingModal/ConfirmBookingModal";
-import { useGetSingleBikeQuery } from "@/redux/features/Bikes/Bikes";
+import {
+  useGetAllBikesQuery,
+  useGetSingleBikeQuery,
+} from "@/redux/features/Bikes/Bikes";
 import { useCreateBikeBookingMutation } from "@/redux/features/bookingBike/bookingBike";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, NavLink } from "react-router-dom";
 import { FaCheckCircle, FaHeart } from "react-icons/fa";
+import { TBike } from "@/types";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const BikeDetail = () => {
   const { id } = useParams();
@@ -16,6 +22,15 @@ const BikeDetail = () => {
   const [backgroundPosition, setBackgroundPosition] = useState("center");
   const [backgroundSize, setBackgroundSize] = useState("cover");
   const [isLiked, setIsLiked] = useState(false);
+
+  const { data: bikes } = useGetAllBikesQuery(undefined);
+
+  console.log(data);
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading bikes.</div>;
+
+  const AllBikes = bikes?.data || [];
 
   if (isLoading)
     return (
@@ -217,6 +232,53 @@ const BikeDetail = () => {
             </div>
           </div>
         </div>
+      </div>
+
+      <h2 className="text-5xl font-extrabold text-center my-10 tracking-wider capitalize">
+        Related Bikes
+      </h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {AllBikes?.filter(
+          (ReletedBike: TBike) =>
+            ReletedBike.brand === bike?.brand && ReletedBike._id !== bike._id
+        )
+          .slice(0, 8)
+          .map((bike: TBike) => (
+            <div
+              key={bike._id}
+              className="group bg-gradient-to-r from-[#29293A] to-[#3C3C4D] rounded-[20px] overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-[1.05] hover:rotate-1 hover:shadow-2xl relative"
+            >
+              <div className="relative h-64 overflow-hidden rounded-t-[20px]">
+                <img
+                  src={bike?.image}
+                  alt={bike.brand}
+                  className="w-full h-full object-cover transition-transform duration-500 transform group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+              </div>
+              <div className="p-6 bg-opacity-90 backdrop-blur-md bg-gradient-to-tr from-[#333] to-[#444] rounded-b-[20px]">
+                <h3 className="text-2xl font-bold text-white mb-2 transition-colors duration-300 group-hover:text-[#FF6F61]">
+                  {bike.brand}
+                </h3>
+                <p className="text-lg text-gray-300">
+                  {bike.name} • {bike.model}
+                </p>
+                <div className="flex justify-between mt-4 text-gray-300">
+                  <p className="text-md">CC: {bike.cc}cc</p>
+                  <p className="text-md font-semibold">
+                    ${bike.pricePerHour}/hr
+                  </p>
+                </div>
+                <NavLink
+                  to={`/bikes/${bike._id}`}
+                  className="mt-6 inline-flex items-center text-white bg-gradient-to-r from-[#FF6F61] to-[#FF3F34] px-5 py-2 rounded-full shadow-lg hover:shadow-2xl transform transition-all duration-500 hover:scale-105"
+                >
+                  View Details
+                  <FontAwesomeIcon icon={faCircleInfo} className="ml-2" />
+                </NavLink>
+              </div>
+            </div>
+          ))}
       </div>
 
       {/* Modal */}
